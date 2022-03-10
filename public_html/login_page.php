@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <form method="post">
+    <form method="post" action="login_page.php">
         <div class="container">
             <label for="username">Username</label>
             <input type="text" name="username" placeholder="Username" name="username" required>
