@@ -20,6 +20,6 @@
     </form>
     <p>
         This paragraph will contain the value that was entered in the username field<br>
-        <?php include 'login.php';?>
+        <?php include 'PHPScripts/login.php';?>
     </p>
 </body>
