@@ -1,0 +1,8 @@
+.center{
+    text-align: center;
+}
+
+div.login-info{
+    position: fixed;
+    border: 3px solid #000000;
+}

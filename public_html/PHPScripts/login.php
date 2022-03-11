@@ -16,7 +16,10 @@
         $passhash = $result->fetch_assoc()["passHash"];
         echo "username found in database!<br />Checking password...";
         if(password_verify($form_password, $passhash)){
-            echo "You entered the correct password! - welcome";
+            echo "You have successfully logged in!";
+            //If the login is successful, set the session username and the session logged in status
+            $_SESSION['username'] = $form_username;
+            $_SESSION['loggedin'] = true;
         }
         else{
             echo "You entered the wrong password!";
@@ -25,6 +28,4 @@
     else{
         echo "Error: There are more than one users with this username";
     }
-    /*echo "The name is: ";
-    echo $_POST['username'];*/
 ?>
