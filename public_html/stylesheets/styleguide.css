@@ -1,0 +1,35 @@
+:root { 
+  --black: #000000;
+  --bon-jour: #e0e0e0;
+  --oslo-gray: #868d96;
+  --shark: #212529;
+  --white: #ffffff;
+ 
+  --font-size-l: 40px;
+  --font-size-m: 25px;
+  --font-size-s: 16px;
+  --font-size-xl: 68px;
+ 
+  --font-family-helveticaneue: "HelveticaNeue", Helvetica;
+  --font-family-helveticaneue-regular: "HelveticaNeue-Regular", Helvetica;
+  --font-family-segoeui-regular: "SegoeUI-Regular", Helvetica;
+  --font-family-segoeui-semibold: "SegoeUI-Semibold", Helvetica;
+}
+.segoeui-regular-normal-shark-25px {
+  color: var(--shark);
+  font-family: var(--font-family-segoeui-regular);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.helveticaneue-normal-oslo-gray-25px {
+  color: var(--oslo-gray);
+  font-family: var(--font-family-helveticaneue);
+  font-size: var(--font-size-m);
+  font-style: normal;
+}
+
+.border-1px-bon-jour {
+  border: 1px solid var(--bon-jour);
+}

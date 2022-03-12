@@ -1,0 +1,118 @@
+/* screen - login-page */
+
+.login-page {
+  background-color: #f5f5f5;
+  height: 100vh;
+  margin: 0px;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.login-page .home-button {
+  height: 55px;
+  right: 23px;
+  position: absolute;
+  top: 32px;
+  width: 250px;
+  z-index: 1;
+}
+
+.login-page .banner {
+  background-color: #00d5ffa8;
+  border: 9px solid #57e3ff;
+  height: 115px;
+  left: 0px;
+  opacity: 0.4;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.login-page .tucasanacom {
+  background-color: transparent;
+  color: #105fd6;
+  font-family: var(--font-family-segoeui-semibold);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 600;
+  height: 55px;
+  left: 23px;
+  letter-spacing: 0.00px;
+  line-height: 40px;
+  position: absolute;
+  text-align: left;
+  top: 32px;
+  white-space: nowrap;
+  width: 250px;
+}
+
+.login-page .welcome-to-tucasana {
+  background-color: transparent;
+  color: var(--black);
+  font-family: var(--font-family-segoeui-semibold);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 600;
+  height: 92px;
+  letter-spacing: 0.00px;
+  line-height: 68px;
+  position: absolute;
+  right: calc(49.92% - 334px);
+  text-align: left;
+  top: calc(22.27% - 20px);
+  white-space: nowrap;
+  width: 670px;
+}
+
+.login-page .log-in-to-your-real {
+  background-color: transparent;
+  color: var(--black);
+  font-family: var(--font-family-segoeui-regular);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
+  height: 68px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  position: absolute;
+  right: calc(49.92% - 369px);
+  text-align: left;
+  top: calc(33.30% - 23px);
+  white-space: nowrap;
+  width: 740px;
+}
+
+.login-form {
+  width: 340px;
+  margin: 300px auto;
+  font-size: 15px;
+}
+
+.login-form form {
+  margin-bottom: 15px;
+  background: #f7f7f7;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+}
+
+.login-form h2 {
+  margin: 0 0 15px;
+}
+
+.form-control, .btn {
+  min-height: 38px;
+  border-radius: 2px;
+}
+
+.btn {        
+  width: 250px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.form-group {
+  margin: 15px;
+}
+    
