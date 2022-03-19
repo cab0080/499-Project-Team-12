@@ -1,0 +1,53 @@
+.banner {
+background-color: #00d5ffa8;
+border: 9px solid #57e3ff;
+height: 115px;
+left: 0px;
+opacity: 0.4;
+position: absolute;
+top: 0px;
+width: 100%;
+}
+
+.tucasanacom {
+background-color: transparent;
+color: #105fd6;
+font-size: 40px;
+font-style: normal;
+font-weight: 600;
+height: 55px;
+left: 23px;
+letter-spacing: 0.00px;
+line-height: 40px;
+position: absolute;
+text-align: left;
+top: 32px;
+white-space: nowrap;
+width: 250px;
+}
+
+.addlisting {
+background-color: transparent;
+color: var(--black);
+font-family: var(--font-family-segoeui-semibold);
+font-size: var(--font-size-xl);
+font-style: normal;
+font-weight: 600;
+height: auto;
+left: 23px;
+letter-spacing: 0.00px;
+line-height: 54px;
+position: absolute;
+text-align: left;
+top: 151px;
+white-space: nowrap;
+width: auto;
+}
+
+.row {
+margin-bottom: 25px;
+}
+
+.form-control {
+width: 500px;
+}
