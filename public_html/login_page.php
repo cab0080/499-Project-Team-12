@@ -36,12 +36,12 @@
           </div>
           <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block">Log in</button>
-          </div>       
+          </div>
+          <p id="set to invisible using js?">
+             <?php include 'PHPScripts/login.php';?>
+        </p>       
       </form>
     </div>
   </div>
-    <p id="set to invisible using js">
-        <?php include 'PHPScripts/login.php';?>
-    </p>
     
 </body>
