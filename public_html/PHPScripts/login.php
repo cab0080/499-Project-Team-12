@@ -1,6 +1,6 @@
 <?php
     include 'connect.php'; //include the script that opens the database connection
-    include 'login_redirect.php';
+    //include 'login_redirect.php';
     $connection = OpenCon();
     $form_username = $_POST['username']; //this is the username that is entered by the site visitor
     $form_password = $_POST['password']; //This is the password that the user entered
@@ -20,7 +20,9 @@
             //echo "username found in database!<br />Checking password...";
             if(password_verify($form_password, $passhash)){
                 //If the login is successful, set the session username and the session logged in status
-                loginAndRedirect($form_username);
+                $_SESSION['username'] = $form_username;
+                $_SESSION['loggedin'] = true;
+                echo "Login successful! <br /><a href='../index.php'>Click here to go back home</a>";
             }
             else{
                 echo "Error: incorrect password.";

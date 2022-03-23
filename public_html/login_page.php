@@ -37,9 +37,9 @@
           <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block">Log in</button>
           </div>
-          <p id="set to invisible using js?">
+          <p>
              <?php include 'PHPScripts/login.php';?>
-        </p>       
+          </p>     
       </form>
     </div>
   </div>
