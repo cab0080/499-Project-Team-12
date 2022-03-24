@@ -1,5 +1,5 @@
 var app = new Vue({
-    el: '#myapp',
+    el: '#listing-container',
     data: {
       mls: "",
       street: "",
