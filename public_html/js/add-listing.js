@@ -6,7 +6,7 @@ function createNewRoom() {
     newRoom.innerHTML = `<div class="row">
                             <div class="col"><label class="form-label">Room Type</label><input class="form-control" type="text" name="type[]" style="width: 400px;"></div>
                             <div class="col"><label class="form-label">Room Features</label><textarea class="form-control" name="features[]" style="width: 400px;"></textarea></div>
-                            <div class="col"><label class="form-label">Area</label><input class="form-control" type="number" name="area[]" min="0" style="width: 130px;"></div>
+                            <div class="col"><label class="form-label">Area</label><input class="form-control" type="number" name="area1[]" min="0" style="width: 130px;"></div>
                             <div class="col"><label class="form-label">Length</label><input class="form-control" type="number" name="length[]" min="0" style="width: 130px;"></div>
                             <div class="col"><button class="btn btn-primary" id="delete_room" type="button" style="margin-top: 32px;" onclick="removeRoom();">Remove</button></div>
                         </div>`

@@ -1,7 +1,9 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <?php include 'PHPScripts/errorMessage.php'; ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <link rel="stylesheet" type="text/css" href="stylesheets/add-listing-page.css" />
@@ -135,7 +137,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <p>Remember to verify.</p><button class="btn btn-primary" type="submit">Submit</button><button class="btn btn-primary" type="button" style="margin-left: 170px;">Cancel</button>
+                <p>Remember to verify.</p><p><?php printMessage(); ?></p><button class="btn btn-primary" type="submit">Submit</button><button class="btn btn-primary" type="button" style="margin-left: 170px;">Cancel</button>
             </div>
         </div>
     </form>

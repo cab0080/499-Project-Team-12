@@ -1,6 +1,7 @@
 <?php
     session_start();
     include 'connect.php';
+    include 'errorMessage.php';
     $connection = OpenCon();
     //$user = $_SESSION['username'];
     $user = 'colezandbergen';
@@ -22,14 +23,25 @@
         So we will execute this loop as many times as there are elements in these arrays.
     */
 
-    for($i = 0; $i < count($_POST['type']); $i++){
+    $roomCount = count($_POST['type']);
+    for($i = 0; $i < $roomCount; $i++){
         $rooms[$i]['type'] = $_POST['type'][$i];
         $rooms[$i]['features'] = $_POST['features'][$i];
-        $rooms[$i]['area'] = $_POST['area'][$i];
+        $rooms[$i]['area'] = $_POST['area1'][$i];
         $rooms[$i]['length'] = $_POST['length'][$i];
     }
 
-    echo "<br>There are " . count($rooms) . " rooms on the page.";
+ ////**********TESTING AREA***********
+    // $count = count($_POST['type']);
+    // echo "the count is " . $count;
+    // for($i = 0; $i<$count;$i++){
+    //     echo "<br>This is room number " . $i;
+    //     echo "<br>  Its type is " . $rooms[$i]['type'];
+    //     echo "<br>  Its features are " . $rooms[$i]['features'];
+    //     echo "<br>  Its area is " . $rooms[$i]['area'];
+    //     echo "<br>  Its length is " . $rooms[$i]['length'];
+        
+    // }
 
     //Now we have an array of rooms. We will add them to the database after the property is there too
 
@@ -57,13 +69,6 @@
 
     $imageDirectory = '../img/';
     $thumbnailPath = $imageDirectory . basename($_FILES['photoPath']['name'][0]);
-    echo "<br>Below is a list of photo files:";
-    foreach($_FILES['photoPath'] as $thing){
-        echo "<br>";
-        foreach($thing as $thing1){
-            echo ", " . $thing1;
-        }
-    }
     
     
 
@@ -105,12 +110,8 @@
     //Now we need to make sure that the query worked
 
     if($result != 1){
-        echo "<br>There was an error adding the post to the database.";
-        echo "<br>" . $connection->error;
-    }
-
-    else{
-        echo "<br>Post added to database successfully.";
+        setMessage("There was an error adding the post to the database.<br>" . $connection->error);
+        header("Location: ../add_listing.php");
     }
 
     //Add the price
@@ -118,17 +119,15 @@
 
     //Next, add the rooms
     $counter = 0;
-    foreach($rooms as $room){
-        $type = $room['type'];
-        $features = $room['features'];
-        $area = $room['area'];
-        $length = $room['length'];
+    for($i=0;$i<$roomCount;$i++){
+        $type = $rooms[$i]['type'];
+        $features = $rooms[$i]['features'];
+        $area = $rooms[$i]['area'];
+        $length = $rooms[$i]['length'];
         $result = $connection->query("INSERT INTO `Room` (`MLSNumber`, `type`, `features`, `area`, `length`) VALUES ('$mlsNum', '$type', '$features', '$area', '$length')");
-        if($result == 1){
-            echo "<br>added room number " . $counter . " to database.";
-        }
-        else{
-            echo "<br>Room insertion error:<br>" . $connection->error;
+        if($result != 1){
+            setMessage("Room insertion error:<br>" . $connection->error);
+            header("Location: ../add_listing.php");
         }
     }
 
@@ -136,16 +135,17 @@
 
     for($i = 0; $i < count($_FILES['photoPath']['name']); $i++){
         $uploadFile = $imageDirectory . basename($_FILES['photoPath']['name'][$i]);
-        echo "Upload file is " . $uploadFile;
         move_uploaded_file($_FILES['photoPath']['tmp_name'][$i], $uploadFile);
         //we've uploaded the file, now we need to upload the image reference to the database
         $result = $connection->query("INSERT INTO `ListingPhoto` (`photoPath`, `MLSNumber`) VALUES ('$uploadFile', '$mlsNum')");
         if($result == 0){
-            echo "<br>There was an error inserting the image to the database";
-            echo "<br> Error: " . $connection->error;
+            setMessage("There was an error inserting the image to the database" . $connection->error);
+            header("Location: ../add_listing.php");
         }
     }
 
     CloseCon($connection);
+
+    header("Location: ../index.php");
 
 ?>

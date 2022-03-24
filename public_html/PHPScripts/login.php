@@ -17,6 +17,7 @@
         if($result->num_rows == 0){
             //printMessage();
             setMessage("Error: username not found");
+            CloseCon($connection);
             header("Location: ../login_page.php");
         }
         else if($result->num_rows == 1){
@@ -27,15 +28,18 @@
                 $_SESSION['username'] = $form_username;
                 $_SESSION['loggedin'] = true;
                 //echo "Login successful! <br /><a href='../index.php'>Click here to go back home</a>";
+                CloseCon($connection);
                 header("Location: ../index.php");
             }
             else{
                 setMessage("Error: incorrect password");
+                CloseCon($connection);
                 header("Location: ../login_page.php");
             }
         }
         else{
             setMessage("Error: There are more than one users with this username");
+            CloseCon($connection);
             header("Location: ../login_page.php");
         }
     }
