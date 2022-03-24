@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +17,7 @@
 <div class="addlisting">Add Listing</div></header>
     <form style="margin-top: 250px;padding: 20px;" enctype="multipart/form-data" method="post" action="PHPScripts/addListing.php">
         <div class="row" style="margin-bottom: 25px;">
-            <div class="col"><label class="form-label">MLS Number</label><input class="form-control" type="text" style="width: 800px;" name="MLSnumber"></div>
+            <div class="col"><label class="form-label">MLS Number</label><input required class="form-control" type="text" style="width: 800px;" name="MLSnumber"></div>
         </div>
         <div class="row">
             <div class="col"><label class="form-label">Property Description</label><textarea class="form-control" style="height: 100px;width: 800px;" name="description"></textarea></div>
@@ -31,10 +32,13 @@
                 </select></div>
         </div>
         <div class="row">
-            <div class="col"><label class="form-label">Listing Agency ID</label><input class="form-control" type="text" name="listingAgencyID" style="width: 500px;"></div>
+            <div class="col"><label class="form-label">Listing Agency</label><select required style="width: 500px;" class="form-select" name="listingAgencyID">
+                <?php include "PHPScripts/getAgencyIDOptions.php" ?>
+                <!--<option value = "test">Test</option>-->
+            </select></div>
         </div>
         <div class="row">
-            <div class="col"><label class="form-label">Price</label><input class="form-control" type="number" name="price" min="0" step="0.01" style="width: 500px;"></div>
+            <div class="col"><label class="form-label">Price</label><input required class="form-control" type="number" name="price" min="0" step="0.01" style="width: 500px;"></div>
         </div>
         <div id="rooms" class="container" style="margin-left: 0px;margin-right: 0px;padding: 0px;">
             <div class="row">
@@ -56,10 +60,10 @@
             <div class="col"><label class="form-label">Square Footage</label><input class="form-control" type="number" name="area" min="1" step="0.1" style="width: 500px;"></div>
         </div>
         <div class="row">
-            <div class="col"><label class="form-label">Street</label><input class="form-control" type="text" name="street" style="width: 500px;"></div>
+            <div class="col"><label class="form-label">Street</label><input required class="form-control" type="text" name="street" style="width: 500px;"></div>
         </div>
         <div class="row">
-            <div class="col"><label class="form-label">City</label><input class="form-control" type="text" name="city" style="width: 500px;"></div>
+            <div class="col"><label class="form-label">City</label><input required class="form-control" type="text" name="city" style="width: 500px;"></div>
         </div>
         <div class="row">
             <div class="col-xxl-1"><label class="form-label">State</label><select class="form-select" name="state">
@@ -129,7 +133,7 @@
             <div class="col"><label class="form-label">High School District</label><input class="form-control" type="text" name="highSchoolDistrict" style="width: 500px;"></div>
         </div>
         <div class="row">
-            <div class="col"><label class="form-label">Photos (Select all files at once.)</label><input class="form-control" type="file" accept="image/*" name="photoPath[]" multiple required="required" style="width: 500px;"></div>
+            <div class="col"><label class="form-label">Photos (Select all files at once.)</label><input class="form-control" type="file" accept="image/*" name="photoPath[]" multiple required style="width: 500px;"></div>
         </div>
         <div class="row">
             <div class="col">

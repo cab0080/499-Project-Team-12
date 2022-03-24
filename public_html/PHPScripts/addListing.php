@@ -113,8 +113,10 @@
         echo "<br>Post added to database successfully.";
     }
 
-    //Next, add the rooms
+    //Add the price
+    $result = $connection->query("INSERT INTO `ListingPrice` (`MLSNumber`, `changedDatetime`, `price`) VALUES ('$mlsNum', CURRENT_TIMESTAMP, '$listingPrice')");
 
+    //Next, add the rooms
     $counter = 0;
     foreach($rooms as $room){
         $type = $room['type'];
@@ -143,5 +145,7 @@
             echo "<br> Error: " . $connection->error;
         }
     }
+
+    CloseCon($connection);
 
 ?>
