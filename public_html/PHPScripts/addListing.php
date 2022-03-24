@@ -56,7 +56,7 @@
     
 
     $imageDirectory = '../img/';
-    $thumbnailPath = $imageDirectory . basename($_FILES['photoPath'][0]['name']);
+    $thumbnailPath = $imageDirectory . basename($_FILES['photoPath']['name'][0]);
     echo "<br>Below is a list of photo files:";
     foreach($_FILES['photoPath'] as $thing){
         echo "<br>";

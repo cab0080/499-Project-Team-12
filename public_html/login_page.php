@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+    <?php include 'PHPScripts/errorMessage.php'; ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <link rel="stylesheet" type="text/css" href="stylesheets/login-page.css" />
@@ -26,7 +27,7 @@
         showing times, and more.
     </div>
     <div class="login-form">
-      <form action="" method="post">
+      <form action="PHPScripts/login.php" method="post">
           <h2 class="text-center">Log in</h2>       
           <div class="form-group">
               <input type="text" class="form-control" name="username" placeholder="Username" required="required">
@@ -38,7 +39,7 @@
               <button type="submit" class="btn btn-primary btn-block">Log in</button>
           </div>
           <p>
-             <?php include 'PHPScripts/login.php';?>
+             <?php printMessage();?>
           </p>     
       </form>
     </div>

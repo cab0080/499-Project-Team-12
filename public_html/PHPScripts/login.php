@@ -1,5 +1,7 @@
 <?php
+    session_start();
     include 'connect.php'; //include the script that opens the database connection
+    include 'errorMessage.php';
     //include 'login_redirect.php';
     $connection = OpenCon();
     $form_username = $_POST['username']; //this is the username that is entered by the site visitor
@@ -13,7 +15,9 @@
     {
         //Find out if there is exactly one result, otherwise we have a problem
         if($result->num_rows == 0){
-            echo "Error: username not found";
+            //printMessage();
+            setMessage("Error: username not found");
+            header("Location: ../login_page.php");
         }
         else if($result->num_rows == 1){
             $passhash = $result->fetch_assoc()["passHash"];
@@ -22,14 +26,17 @@
                 //If the login is successful, set the session username and the session logged in status
                 $_SESSION['username'] = $form_username;
                 $_SESSION['loggedin'] = true;
-                echo "Login successful! <br /><a href='../index.php'>Click here to go back home</a>";
+                //echo "Login successful! <br /><a href='../index.php'>Click here to go back home</a>";
+                header("Location: ../index.php");
             }
             else{
-                echo "Error: incorrect password.";
+                setMessage("Error: incorrect password");
+                header("Location: ../login_page.php");
             }
         }
         else{
-            echo "Error: There are more than one users with this username";
+            setMessage("Error: There are more than one users with this username");
+            header("Location: ../login_page.php");
         }
     }
 ?>

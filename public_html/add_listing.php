@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +33,6 @@
         <div class="row">
             <div class="col"><label class="form-label">Listing Agency</label><select required style="width: 500px;" class="form-select" name="listingAgencyID">
                 <?php include "PHPScripts/getAgencyIDOptions.php" ?>
-                <!--<option value = "test">Test</option>-->
             </select></div>
         </div>
         <div class="row">
