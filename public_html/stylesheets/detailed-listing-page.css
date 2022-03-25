@@ -1,0 +1,51 @@
+.banner {
+    background-color: #00d5ffa8;
+    border: 9px solid #57e3ff;
+    height: 115px;
+    left: 0px;
+    opacity: 0.4;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+    
+.tucasanacom {
+    background-color: transparent;
+    color: #105fd6;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    height: 55px;
+    left: 23px;
+    letter-spacing: 0.00px;
+    line-height: 40px;
+    position: absolute;
+    text-align: left;
+    top: 32px;
+    white-space: nowrap;
+    width: 250px;
+}
+
+#homeButton {
+    right: 23px;
+    position: absolute;
+    top: 32px;
+    z-index: 1;
+  }
+
+.carousel-inner > .carousel-item > img {
+    width: 640px;
+    height: 460px;
+}
+  
+.list-inline-item {
+    font-size: 25px;
+}
+  
+li > span {
+    font-weight: bold;
+}
+
+.accordian-button {
+    font-size: 25px;
+}
