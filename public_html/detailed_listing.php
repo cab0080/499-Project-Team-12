@@ -1,3 +1,4 @@
+<?php session_start();$_SESSION['number'] = $_GET['number'];?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +9,8 @@
         <link rel="stylesheet" type="text/css" href="stylesheets/styleguide.css" />
         <link rel="stylesheet" type="text/css" href="stylesheets/globals.css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
 
 <body style="margin: 0; background: #f5f5f5" >
@@ -18,13 +21,16 @@
     </header>
     <div class="container" style="margin-top: 115px;width: 1000px;">
         <div class="carousel slide" data-bs-ride="carousel" id="photo_carousel" style="height: 460px;">
-            <div class="carousel-inner">
-                <div class="carousel-item active"><img class="w-100 d-block" src="img/placeholder.png" alt="Slide Image"></div>
+            <div class="carousel-inner" id="photo-container">
+                <div class="carousel-item active" v-for='(photo, key) in photos' v-if="key === 0"><img class="w-100 d-block" v-bind:src="photo.photoPath" alt="Slide Image"></div>
+                <div class="carousel-item" v-for='(photo, key) in photos' v-if="key !== 0"><img class="w-100 d-block" v-bind:src="photo.photoPath" alt="Slide Image"></div>
+                <!--<div class="carousel-item active"><img class="w-100 d-block" src="img/placeholder.png" alt="Slide Image"></div>
                 <div class="carousel-item"><img class="w-100 d-block" src="img/placeholder.png" alt="Slide Image"></div>
                 <div class="carousel-item"><img class="w-100 d-block" src="img/placeholder.png" alt="Slide Image"></div>
                 <div class="carousel-item"><img class="w-100 d-block" src="img/placeholder.png" alt="Slide Image"></div>
-                <div class="carousel-item"><img class="w-100 d-block" src="img/placeholder.png" alt="Slide Image"></div>
+                <div class="carousel-item"><img class="w-100 d-block" src="img/placeholder.png" alt="Slide Image"></div>-->
             </div>
+            <script src="js/vuePhotos.js"></script>
             <div><a class="carousel-control-prev" href="#photo_carousel" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#photo_carousel" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
             <ol class="carousel-indicators">
                 <li data-bs-target="#photo_carousel" data-bs-slide-to="0" class="active"></li>
@@ -59,6 +65,7 @@
                 <div class="col"><button class="btn btn-primary" type="button">Request Showing</button></div>
             </div>
         </div>
+        <script src="js/vueListingSummary.js">
         <div id="listing-details" style="margin-top: 20px;">
             <div class="accordion" role="tablist" id="listing-details">
                 <div class="accordion-item" id="propDescription">
