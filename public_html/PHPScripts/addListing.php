@@ -6,7 +6,7 @@
     $user = $_SESSION['username'];
     $listingMLSNumber = $_POST['MLSnumber'];
     $mlsNum = $listingMLSNumber;
-    $listingDetailPath = "../detailInfo/" . $mlsNum;
+    $listingDetailPath = "../detailInfo?number=" . $mlsNum;
     $listingdescription = $_POST['description'];
     $listingdwellingType = $_POST['dwellingType'];
     $listinglistingAgencyID = $_POST['listingAgencyID'];
