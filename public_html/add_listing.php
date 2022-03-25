@@ -137,7 +137,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <p>Remember to verify.</p><p><?php printMessage(); ?></p><button class="btn btn-primary" type="submit">Submit</button><button class="btn btn-primary" type="button" style="margin-left: 170px;">Cancel</button>
+                <p>Remember to verify.</p><p style="color: #c90000"><?php printMessage(); ?></p><button class="btn btn-primary" type="submit">Submit</button><button class="btn btn-primary" type="button" style="margin-left: 170px;">Cancel</button>
             </div>
         </div>
     </form>

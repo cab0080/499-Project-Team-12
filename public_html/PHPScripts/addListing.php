@@ -3,8 +3,7 @@
     include 'connect.php';
     include 'errorMessage.php';
     $connection = OpenCon();
-    //$user = $_SESSION['username'];
-    $user = 'colezandbergen';
+    $user = $_SESSION['username'];
     $listingMLSNumber = $_POST['MLSnumber'];
     $mlsNum = $listingMLSNumber;
     $listingDetailPath = "../detailInfo/" . $mlsNum;
@@ -112,6 +111,7 @@
     if($result != 1){
         setMessage("There was an error adding the post to the database.<br>" . $connection->error);
         header("Location: ../add_listing.php");
+        die;
     }
 
     //Add the price
@@ -128,6 +128,7 @@
         if($result != 1){
             setMessage("Room insertion error:<br>" . $connection->error);
             header("Location: ../add_listing.php");
+            die;
         }
     }
 
@@ -141,11 +142,13 @@
         if($result == 0){
             setMessage("There was an error inserting the image to the database" . $connection->error);
             header("Location: ../add_listing.php");
+            die;
         }
     }
 
     CloseCon($connection);
 
+    
     header("Location: ../index.php");
 
 ?>
