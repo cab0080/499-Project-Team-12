@@ -19,5 +19,10 @@ var app = new Vue({
     },
     created: function(){
       this.allRecords();
-    }
+    },
+    filters: {
+        usPrice: function (value) {
+            return "$" + parseInt(value).toLocaleString("en-US");
+        }
+    },
   })
