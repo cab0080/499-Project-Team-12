@@ -49,21 +49,13 @@
 }
 
 .login-page .welcome-to-tucasana {
-  background-color: transparent;
   color: var(--black);
   font-family: var(--font-family-segoeui-semibold);
   font-size: var(--font-size-xl);
   font-style: normal;
   font-weight: 600;
-  height: 92px;
-  letter-spacing: 0.00px;
-  line-height: 68px;
-  position: absolute;
-  right: calc(49.92% - 334px);
-  text-align: left;
-  top: calc(22.27% - 20px);
+  text-align: center;
   white-space: nowrap;
-  width: 670px;
 }
 
 .login-page .log-in-to-your-real {
@@ -73,20 +65,13 @@
   font-size: var(--font-size-m);
   font-style: normal;
   font-weight: 400;
-  height: 68px;
-  letter-spacing: 0.00px;
-  line-height: 25px;
-  position: absolute;
-  right: calc(49.92% - 369px);
   text-align: center;
-  top: calc(33.30% - 23px);
   white-space: nowrap;
-  width: 740px;
 }
 
 .login-form {
   width: 340px;
-  margin: 300px auto;
+  margin: 20px auto;
   font-size: 15px;
 }
 

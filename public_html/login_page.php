@@ -20,10 +20,14 @@
     </div>
     <div class="banner"></div>
     <div class="tucasanacom">tucasana.com</div>
-    <div class="welcome-to-tucasana">Welcome to Tucasana</div>
-    <div class="log-in-to-your-real">
-        Log in to your real estate agent or manager account to manage <br />your listings, generate documents, check
-        showing times, and more.
+    <div class="row" style="margin-top: 125px;">
+      <div class="welcome-to-tucasana">Welcome to Tucasana</div>
+    </div>
+    <div class="row">
+      <div class="log-in-to-your-real">
+          Log in to your real estate agent or manager account to manage <br />your listings, generate documents, check
+          showing times, and more.
+      </div>
     </div>
     <div class="login-form">
       <form action="" method="post">
