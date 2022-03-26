@@ -1,3 +1,8 @@
+
+/**
+ * This file is not being used right now
+ * I will be replacing the vue script with a raw php output for the detailled listing page
+ */
 var ListingSummary = new Vue({
     el:'#listing-summary',
     data: {
