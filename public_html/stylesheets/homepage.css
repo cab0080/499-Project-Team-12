@@ -1,8 +1,26 @@
-.center{
+.center {
     text-align: center;
 }
 
-div.login-info{
-    position: fixed;
-    border: 3px solid #000000;
+div.login-info {
+  position: fixed;
+  border: 3px solid #000000;
+}
+
+body {
+  margin: 0px;
+}
+
+header {
+  background: #00d5ffa8;
+  color: #105fd6;
+  font-family: "SegoeUI-Semibold", Helvetica;
+  font-size: 30px;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+header h1 {
+  margin: 0;
 }
