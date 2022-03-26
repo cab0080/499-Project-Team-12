@@ -1,4 +1,3 @@
-<?php session_start();$_SESSION['number'] = $_GET['number'];?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,10 +7,10 @@
         <link rel="stylesheet" type="text/css" href="stylesheets/detailed-listing-page.css" />
         <link rel="stylesheet" type="text/css" href="stylesheets/styleguide.css" />
         <link rel="stylesheet" type="text/css" href="stylesheets/globals.css" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <?php include 'PHPScripts/getListingSummary.php' ?>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <?php include 'PHPScripts/getListingSummary.php' ?>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     </head>
 
 <body style="margin: 0; background: #f5f5f5" >
@@ -44,29 +43,28 @@
         <div id="listing-summary">
             <div class="row">
                 <div class="col">
-                    <h1 id="price" style="font-weight: bold;">$<?php getPrice() ?></h1>
+                    <h1 id="price" style="font-weight: bold;">$<?php getPrice($_GET['number']) ?></h1>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <ul class="list-inline" style="padding: 0px;">
-                        <li class="list-inline-item"><span id="numBed"><?php getBathrooms() ?></span>&nbsp;bed&nbsp;</li>
-                        <li class="list-inline-item"><span id="numBath"><?php getBedrooms() ?></span>&nbsp;bath&nbsp;</li>
-                        <li class="list-inline-item"><span id="area">4,000</span>&nbsp;sqft&nbsp;</li>
-                        <li class="list-inline-item"><span id="lotSize">1.5</span>&nbsp;lot size</li>
+                        <li class="list-inline-item"><span id="numBed"><?php getBedrooms($_GET['number']) ?></span>&nbsp;bed&nbsp;</li>
+                        <li class="list-inline-item"><span id="numBath"><?php getBathrooms($_GET['number']) ?></span>&nbsp;bath&nbsp;</li>
+                        <li class="list-inline-item"><span id="area"><?php getArea($_GET['number']) ?></span>&nbsp;sqft&nbsp;</li>
+                        <li class="list-inline-item"><span id="lotSize"><?php getLotsize($_GET['number']) ?></span>&nbsp;lot size</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <h2 id="address">1234 Internet Street, Madison, AL 35758</h2>
+                    <h2 id="address"><?php getAddress($_GET['number']) ?></h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col"><button class="btn btn-primary" type="button">Request Showing</button></div>
             </div>
         </div>
-        <script src="js/vueListingSummary.js">
         <div id="listing-details" style="margin-top: 20px;">
             <div class="accordion" role="tablist" id="listing-details">
                 <div class="accordion-item" id="propDescription">
@@ -74,11 +72,11 @@
                     <div class="accordion-collapse collapse item-1" role="tabpanel">
                         <div class="accordion-body">
                             <ul>
-                                <li><span id="dwellingType">Property Type:&nbsp;</span>Single Family</li>
-                                <li><span id="fencing">Fenced:&nbsp;</span>Yes</li>
-                                <li><span id="detachedGarage">Detached Garage:&nbsp;</span>Yes</li>
+                                <li><span id="dwellingType">Property Type:&nbsp;</span><?php getPropertyType($_GET['number']) ?></li>
+                                <li><span id="fencing">Fenced:&nbsp;</span><?php getFenced($_GET['number']) ?></li>
+                                <li><span id="detachedGarage">Detached Garage:&nbsp;</span><?php getGarage($_GET['number']) ?></li>
                             </ul>
-                            <p id="description" class="mb-0">Property description goes here.</p>
+                            <p id="description" class="mb-0"><?php getPropertyDescription($_GET['number']) ?></p>
                         </div>
                     </div>
                 </div>
