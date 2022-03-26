@@ -31,7 +31,7 @@
       </div>
     </div>
   </div>
-  <script src="JS/vueTest.js"></script>
+  <script src="js/vueTest.js"></script>
   <div class="login-info">
     <?php include 'PHPScripts/login-status.php' ?>
   </div>
