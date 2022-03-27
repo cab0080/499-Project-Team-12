@@ -4,12 +4,12 @@
 <head>
   <meta charset="utf-8">
   <title>Tucasana!</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="stylesheets/globals.css" />
   <link rel="stylesheet" href="stylesheets/homepage.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg">
@@ -34,6 +34,36 @@
   </nav>
   <div id="listing-container">
     <div class="listing-panel">
+      <div class="dropdown">
+        <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          Filter
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <form class="px-4 py-3">
+            <div class="mb-3">
+              <label for="areaStartFilter" class="form-label">Min sqft</label>
+              <input type="number" class="form-control" id="areaStartFilter" placeholder="min" min="0">
+            </div>
+            <div class="mb-3">
+              <label for="areaEndFilter" class="form-label">Max sqft</label>
+              <input type="number" class="form-control" id="areaEndFilter" placeholder="max">
+            </div>
+            <div class="mb-3">
+              <label for="priceStartFilter" class="form-label">Min price</label>
+              <input type="number" class="form-control" id="priceStartFilter" placeholder="min" min="0">
+            </div>
+            <div class="mb-3">
+              <label for="priceEndFilter" class="form-label">Max price</label>
+              <input type="number" class="form-control" id="priceEndFilter" placeholder="max">
+            </div>
+            <div class="mb-3">
+              <label for="zipFilter" class="form-label">Zip code</label>
+              <input type="number" class="form-control" id="zipFilter" placeholder="enter zip">
+            </div>
+            <button type="submit" class="btn btn-primary">Apply</button>
+          </form>
+        </div>
+      </div>
       <div class="row row-cols-3">
         <div class="col" v-for='listing in listings'>
           <div class="card h-100 listing" style="width: 18rem;">
@@ -51,5 +81,6 @@
     </div>
   </div>
   <script src="JS/vueTest.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
