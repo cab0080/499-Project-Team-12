@@ -51,8 +51,5 @@
     </div>
   </div>
   <script src="JS/vueTest.js"></script>
-  <div class="login-info">
-    <?php include 'PHPScripts/login-status.php' ?>
-  </div>
 </body>
 </html>
