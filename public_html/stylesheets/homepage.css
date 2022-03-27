@@ -11,16 +11,51 @@ body {
   margin: 0px;
 }
 
-header {
+.navbar {
   background: #00d5ffa8;
-  color: #105fd6;
-  font-family: "SegoeUI-Semibold", Helvetica;
-  font-size: 30px;
+  height: 100px;
   padding: 10px;
   text-align: center;
-  width: 100%;
+}
+
+.navbar-brand {
+  color: #105fd6;
+  font-family: "SegoeUI-Semibold", Helvetica;
+  font-size: 40px;
+}
+
+.add-listing {
+  margin: 10px 20px 0 0;
 }
 
 header h1 {
   margin: 0;
+}
+
+.card-text {
+  margin: 0 0 8px;
+}
+
+.card-img-top {
+  height: 160px;
+  object-fit: cover;
+}
+
+.col {
+  margin-bottom: 40px;
+}
+
+.listing-panel {
+  margin: 15px auto;
+  width: 50%;
+}
+
+.listing-address {
+  font-size: 1em;
+  height: 54px;
+}
+
+.listing-agent {
+  font-size: 0.7em;
+  margin-top: 5px;
 }

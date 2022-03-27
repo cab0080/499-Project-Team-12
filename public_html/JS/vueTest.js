@@ -10,10 +10,10 @@ var app = new Vue({
       allRecords: function(){
         axios.get('PHPScripts/fetchListings.php')
         .then(function (listing_results) {
-           app.listings = listing_results.data;
+          app.listings = listing_results.data;
         })
         .catch(function (error) {
-           console.log(error);
+          console.log(error);
         });
       }
     },
@@ -22,7 +22,10 @@ var app = new Vue({
     },
     filters: {
         usPrice: function (value) {
-            return "$" + parseInt(value).toLocaleString("en-US");
+          return "$" + parseInt(value).toLocaleString("en-US");
+        },
+        usInteger: function(value) {
+          return parseInt(value).toLocaleString("en-US");
         }
     },
   })
