@@ -19,14 +19,18 @@
     <input type='button' @click='allRecords()' value='Select All Listings'>
     <br><br>
     <div class="listing-panel">
-      <div class="card listing" style="width: 18rem;" v-for='listing in listings'>
-        <img v-bind:src="listing.thumbnailPath" v-bind:alt="'MLS# ' + listing.MLSNumber + ' thumbnail'" width="100" height="75" class="card-img-top">
-        <div class="card-body">
-          <h4 class="card-title listing-price">{{ listing.price | usPrice }}</h4>
-          <address class="card-text listing-address">{{ listing.street }}, {{ listing.city }}, {{ listing.state }} {{ listing.zip }}</address>
-          <div class="card-text listing-area">{{ listing.area }} sqft</div>
-          <div class="listing-agent">listed by {{ listing.firstName }} {{ listing.lastName }} - {{ listing.name }}</div>
-          <a v-bind:href="listing.detailPath" class="btn btn-primary">View Listing</a>
+      <div class="row row-cols-3">
+        <div class="col" v-for='listing in listings'>
+          <div class="card h-100 listing" style="width: 18rem;">
+            <img v-bind:src="listing.thumbnailPath" v-bind:alt="'MLS# ' + listing.MLSNumber + ' thumbnail'" width="100" height="75" class="card-img-top">
+            <div class="card-body">
+              <h4 class="card-title listing-price">{{ listing.price | usPrice }}</h4>
+              <h6 class="card-subtitle text-muted listing-area">{{ listing.area | usInteger }} sqft</h6>
+              <address class="card-text listing-address">{{ listing.street }}, {{ listing.city }}, {{ listing.state }} {{ listing.zip }}</address>
+              <a v-bind:href="listing.detailPath" class="btn btn-primary">View Listing</a>
+              <p class="card-text text-muted listing-agent">listed by {{ listing.firstName }} {{ listing.lastName }} | {{ listing.name }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

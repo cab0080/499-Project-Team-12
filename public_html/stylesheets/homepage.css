@@ -24,3 +24,31 @@ header {
 header h1 {
   margin: 0;
 }
+
+.card-text {
+  margin: 0 0 8px;
+}
+
+.card-img-top {
+  height: 160px;
+  object-fit: cover;
+}
+
+.listing {
+  margin: 0 auto;
+}
+
+.listing-panel {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.listing-address {
+  font-size: 1em;
+  height: 54px;
+}
+
+.listing-agent {
+  font-size: 0.7em;
+  margin-top: 5px;
+}
