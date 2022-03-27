@@ -1,3 +1,4 @@
+<?php session_start();$_SESSION['number']=$_GET['number']; ?>
 <!DOCTYPE html>
 <html lang="en">
 
