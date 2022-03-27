@@ -11,14 +11,17 @@ body {
   margin: 0px;
 }
 
-header {
+.navbar {
   background: #00d5ffa8;
-  color: #105fd6;
-  font-family: "SegoeUI-Semibold", Helvetica;
-  font-size: 30px;
+  height: 100px;
   padding: 10px;
   text-align: center;
-  width: 100%;
+}
+
+.navbar-brand {
+  color: #105fd6;
+  font-family: "SegoeUI-Semibold", Helvetica;
+  font-size: 40px;
 }
 
 header h1 {
@@ -34,12 +37,12 @@ header h1 {
   object-fit: cover;
 }
 
-.listing {
-  margin: 0 auto;
+.col {
+  margin-bottom: 40px;
 }
 
 .listing-panel {
-  margin: 0 auto;
+  margin: 30px auto;
   width: 50%;
 }
 

@@ -12,12 +12,24 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-  <header>
-    <h1>tucasana</h1>
-  </header>
+  <nav class="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">tucasana</a>
+      <ul class="navbar-nav">
+        <?php  if ($_SESSION['loggedin']) : ?>
+          <li class="nav-item">
+            Logged in as <?php echo $_SESSION['username']; ?>
+            <a class="nav-link" href="PHPScripts/signout.php">Click here to log out</a>
+          </li>
+        <?php else : ?>
+          <li class="nav-item">
+            <a class="btn btn-primary" href="login_page.php" role="button">Log In</a>
+          </li>
+        <?php endif ?>
+      </ul>
+    </div>
+  </nav>
   <div id="listing-container">
-    <input type='button' @click='allRecords()' value='Select All Listings'>
-    <br><br>
     <div class="listing-panel">
       <div class="row row-cols-3">
         <div class="col" v-for='listing in listings'>
