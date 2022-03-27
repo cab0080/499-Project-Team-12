@@ -12,11 +12,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-  <nav class="navbar">
+  <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">tucasana</a>
+      <a class="navbar-brand" href="#">tucasana.com</a>
       <ul class="navbar-nav">
         <?php  if ($_SESSION['loggedin']) : ?>
+          <li class="nav-item">
+            <a class="btn btn-primary add-listing" href="add_listing.php" role="button">New Listing <b>+</b></a>
+          </li>
           <li class="nav-item">
             Logged in as <?php echo $_SESSION['username']; ?>
             <a class="nav-link" href="PHPScripts/signout.php">Click here to log out</a>

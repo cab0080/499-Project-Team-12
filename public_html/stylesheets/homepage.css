@@ -24,6 +24,10 @@ body {
   font-size: 40px;
 }
 
+.add-listing {
+  margin: 10px 20px 0 0;
+}
+
 header h1 {
   margin: 0;
 }
@@ -42,7 +46,7 @@ header h1 {
 }
 
 .listing-panel {
-  margin: 30px auto;
+  margin: 15px auto;
   width: 50%;
 }
 
