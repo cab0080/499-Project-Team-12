@@ -87,5 +87,27 @@
         $row = returnListing($listingNumber);
         echo $row['description'];
     }
+
+    function getSubdivision($listingNumber){
+        $row = returnListing($listingNumber);
+        echo $row['subdivision'];
+    }
+
+    function getElementary($listingNumber){
+        $row = returnListing($listingNumber);
+        echo $row['elemSchoolDisctrict'];//typo on the database column LOL
+    }
+
+    function getMiddle($listingNumber){
+        $row = returnListing($listingNumber);
+        echo $row['midSchoolDistrict'];
+    }
+
+    function getHigh($listingNumber){
+        $row = returnListing($listingNumber);
+        echo $row['highSchoolDistrict'];
+    }
+
+
     
 ?>

@@ -53,7 +53,7 @@
                         <li class="list-inline-item"><span id="numBed"><?php getBedrooms($_GET['number']) ?></span>&nbsp;bed&nbsp;</li>
                         <li class="list-inline-item"><span id="numBath"><?php getBathrooms($_GET['number']) ?></span>&nbsp;bath&nbsp;</li>
                         <li class="list-inline-item"><span id="area"><?php getArea($_GET['number']) ?></span>&nbsp;sqft&nbsp;</li>
-                        <li class="list-inline-item"><span id="lotSize"><?php getLotsize($_GET['number']) ?></span>&nbsp;lot size</li>
+                        <li class="list-inline-item"><span id="lotSize"><?php getLotsize($_GET['number']) ?></span>&nbsp;acres</li>
                     </ul>
                 </div>
             </div>
@@ -84,16 +84,17 @@
                 <div class="accordion-item" id="featuresRooms">
                     <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#listing-details .item-2" aria-expanded="false" aria-controls="listing-details .item-2">Features and Rooms</button></h2>
                     <div class="accordion-collapse collapse item-2" role="tabpanel">
-                        <div class="accordion-body">
-                            <div id="room">
-                                <h3 id="roomType">Bedroom</h3>
+                        <div class="accordion-body" id="room-list">
+                            <div id="room" v-for="room in rooms">
+                                <h3 id="roomType">{{room.type}}</h3>
                                 <ul>
-                                    <li><span>Features:&nbsp;</span>features here</li>
-                                    <li><span>Area:&nbsp;</span>100</li>
-                                    <li><span>Length:&nbsp;</span>20</li>
+                                    <li><span>Features:&nbsp;</span>{{room.features}}</li>
+                                    <li><span>Area:&nbsp;</span>{{room.area}}</li>
+                                    <li><span>Length:&nbsp;</span>{{room.length}}</li>
                                 </ul>
                             </div>
                         </div>
+                        <script src="js/getRooms.js"></script>
                     </div>
                 </div>
                 <div class="accordion-item" id="subSchools">
@@ -101,10 +102,10 @@
                     <div class="accordion-collapse collapse item-3" role="tabpanel">
                         <div class="accordion-body">
                             <ul>
-                                <li><span id="subdivision">Subdivision:&nbsp;</span>Subdivision here.</li>
-                                <li><span id="elemSchoolDistrict">Elementary School:&nbsp;</span>Elementary School here.</li>
-                                <li><span id="midSchoolDistrict">Middle School:&nbsp;</span>Middle School here.</li>
-                                <li><span id="highSchoolDistrict">High School:&nbsp;</span>High School here.</li>
+                                <li><span id="subdivision">Subdivision:&nbsp;</span><?php getSubdivision($_GET['number'])?></li>
+                                <li><span id="elemSchoolDistrict">Elementary School:&nbsp;</span><?php getElementary($_GET['number'])?></li>
+                                <li><span id="midSchoolDistrict">Middle School:&nbsp;</span><?php getMiddle($_GET['number'])?></li>
+                                <li><span id="highSchoolDistrict">High School:&nbsp;</span><?php getHigh($_GET['number'])?></li>
                             </ul>
                         </div>
                     </div>
