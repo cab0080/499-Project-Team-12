@@ -18,7 +18,7 @@
     <header>
         <div class="banner"></div>
         <div class="tucasanacom">tucasana.com</div>
-        <button id="homeButton" class="btn btn-primary pull-right" type="button">Home</button>
+        <a href="index.php" id="homeButton" class="btn btn-primary pull-right" type="button">Home</a>
     </header>
     <div class="container" style="margin-top: 115px;width: 1000px;">
         <div class="carousel slide" data-bs-ride="carousel" id="photo_carousel" style="height: 460px;">
