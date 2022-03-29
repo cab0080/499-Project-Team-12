@@ -73,15 +73,17 @@
 
     //Now it's time to insert this thing into the database.
     //Big long SQL query:
-    $result = $connection->query("INSERT INTO `Listing` (`MLSNumber`, `thumbnailPath`, `street`, `city`, `state`, `zip`, 
+    //Changing this to prepare statement. 
+    //After it is prepared, we will bind the variables, then execute
+    $statement = $connection->prepare("INSERT INTO `Listing` (`MLSNumber`, `thumbnailPath`, `street`, `city`, `state`, `zip`, 
         `area`, `listingAgentUsername`, `listingAgencyID`, `detailPath`, `status`, `description`, `lotSize`, `dwellingType`, 
         `builtYear`, `subdivision`, `elemSchoolDisctrict`, `midSchoolDistrict`, `highSchoolDistrict`, `fencing`, `detachedGarage`, 
         `agentHitCount`, `visitorHitCount`, `shoppingAreas`, `postedDatetime`, `lastEditDatetime`)
          VALUES (
             '$listingMLSNumber', 
             '$thumbnailPath', 
-            '$listingstreet', 
-            '$listingcity', 
+            ?, 
+            ?, 
             '$listingstate', 
             '$listingzip', 
             '$listingarea', 
@@ -89,14 +91,14 @@
             '$listinglistingAgencyID', 
             '$listingDetailPath', 
             'available', 
-            '$listingdescription', 
+            ?, 
             '$listinglotSize', 
             '$listingdwellingType', 
             NULL, 
-            '$listingsubdivision', 
-            '$listingelemSchoolDistrict', 
-            '$listingmidSchoolDistrict', 
-            '$listinghighSchoolDistrict', 
+            ?, 
+            ?, 
+            ?, 
+            ?, 
             '$listingfencing', 
             '$listingdetachedGarage', 
             '0', 
@@ -105,10 +107,12 @@
             CURRENT_TIMESTAMP, 
             CURRENT_TIMESTAMP)
     ");
-
+    
+    $statement->bind_param("sssssss", $listingstreet, $listingcity, $listingdescription, $listingsubdivision, $listingelemSchoolDistrict, $listingmidSchoolDistrict, $listinghighSchoolDistrict);
+    
     //Now we need to make sure that the query worked
 
-    if($result != 1){
+    if(!$statement->execute()){ //statement is actually executed HERE
         setMessage("There was an error adding the post to the database.<br>" . $connection->error);
         header("Location: ../add_listing.php");
         die;
@@ -124,8 +128,9 @@
         $features = $rooms[$i]['features'];
         $area = $rooms[$i]['area'];
         $length = $rooms[$i]['length'];
-        $result = $connection->query("INSERT INTO `Room` (`MLSNumber`, `type`, `features`, `area`, `length`) VALUES ('$mlsNum', '$type', '$features', '$area', '$length')");
-        if($result != 1){
+        $statement = $connection->prepare("INSERT INTO `Room` (`MLSNumber`, `type`, `features`, `area`, `length`) VALUES ('$mlsNum', ?, ?, '$area', '$length')");
+        $statement->bind_param("ss", $type, $features);
+        if(!$statement->execute()){
             setMessage("Room insertion error:<br>" . $connection->error);
             header("Location: ../add_listing.php");
             die;
@@ -139,10 +144,15 @@
         move_uploaded_file($_FILES['photoPath']['tmp_name'][$i], $uploadFile);
         //we've uploaded the file, now we need to upload the image reference to the database
         $result = $connection->query("INSERT INTO `ListingPhoto` (`photoPath`, `MLSNumber`) VALUES ('$uploadFile', '$mlsNum')");
-        if($result == 0){
-            setMessage("There was an error inserting the image to the database" . $connection->error);
-            header("Location: ../add_listing.php");
-            die;
+
+        if($result == 1){
+            $num = 1;
+            while($result != 1){ //This will try to protect against duplicates
+                $uploadFile = $imageDirectory . $num . basename($_FILES['photoPath']['name'][$i]);
+                move_uploaded_file($_FILES['photoPath']['tmp_name'][$i], $uploadFile);
+                $result = $connection->query("INSERT INTO `ListingPhoto` (`photoPath`, `MLSNumber`) VALUES ('$uploadFile', '$mlsNum')");
+                $num++;
+            }
         }
     }
 

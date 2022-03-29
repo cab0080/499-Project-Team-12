@@ -115,12 +115,12 @@
                     <div class="accordion-collapse collapse item-4" role="tabpanel">
                         <div class="accordion-body">
                             <ul>
-                                <li><span id="agencyName">Listing Agency:&nbsp;</span>Agency here.</li>
-                                <li><span id="agencyAddress">Agency Address:&nbsp;</span>Agency Address here.</li>
-                                <li><span id="agenyPhoneNum">Agency Phone Number:&nbsp;</span>123-456-7890</li>
-                                <li><span id="agentName">Listing Agent:&nbsp;</span>Agent Name here.</li>
-                                <li><span id="agentPhoneNum">Agent Phone Number:&nbsp;</span>123-456-7890<br></li>
-                                <li><span id="agentEmail">Agent Email:&nbsp;</span>example@gmail.com</li>
+                                <li><span id="agencyName">Listing Agency:&nbsp;</span><?php getAgency($_GET['number']) ?></li>
+                                <li><span id="agencyAddress">Agency Address:&nbsp;</span><?php getAgencyAddress($_GET['number']) ?></li>
+                                <li><span id="agenyPhoneNum">Agency Phone Number:&nbsp;</span><?php getAgencyPhone($_GET['number']) ?></li>
+                                <li><span id="agentName">Listing Agent:&nbsp;</span><?php getAgentName($_GET['number']) ?></li>
+                                <li><span id="agentPhoneNum">Agent Phone Number:&nbsp;</span><?php getAgentPhone($_GET['number']) ?><br></li>
+                                <li><span id="agentEmail">Agent Email:&nbsp;</span><?php getAgentEmail($_GET['number']) ?></li>
                             </ul>
                         </div>
                     </div>

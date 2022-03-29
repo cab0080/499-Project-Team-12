@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col"><label class="form-label">Lot Size</label><input class="form-control" type="number" name="lotSize" min="0" step="0.1" style="width: 500px;"></div>
+            <div class="col"><label class="form-label">Lot Size</label><input class="form-control" type="number" name="lotSize" min="0" step="0.01" style="width: 500px;"></div>
         </div>
         <div class="row">
             <div class="col"><label class="form-label">Square Footage</label><input class="form-control" type="number" name="area" min="1" step="0.1" style="width: 500px;"></div>
