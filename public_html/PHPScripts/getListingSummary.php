@@ -10,6 +10,26 @@
         return $row;
     }
 
+    function returnAgency($listingNumber){
+        $agency = returnListing($listingNumber)['listingAgencyID'];
+        $sql = "SELECT * FROM `Agency` WHERE agencyID = '$agency'";
+        $connection = OpenCon();
+        $result = $connection->query($sql);
+        $row = $result->fetch_assoc();
+        CloseCon($connection);
+        return $row;
+    }
+
+    function returnAgent($listingNumber){
+        $agent = returnListing($listingNumber)['listingAgentUsername'];
+        $sql = "SELECT * FROM  Agent WHERE username = '$agent'";
+        $connection = OpenCon();
+        $result = $connection->query($sql);
+        $row = $result->fetch_assoc();
+        CloseCon($connection);
+        return $row;
+    }
+
     function getBathrooms($listingNumber){
         $connection = OpenCon();
         $result = $connection->query("SELECT type, COUNT(*) AS bathroomCount FROM Room WHERE MLSNumber = '$listingNumber' AND type='Bathroom'");
@@ -108,6 +128,39 @@
         echo $row['highSchoolDistrict'];
     }
 
+    function getAgency($listingNumber){
+        $agency = returnAgency($listingNumber);
+        echo $agency['name'];
+    }
 
+    function getAgencyAddress($listingNumber){
+        $agency = returnAgency($listingNumber);
+        echo $agency['street'] . ", " . $agency['city'] . ", " . $agency['state'] . " " .$agency['zip'];
+    }
+
+    function getAgencyPhone($listingNumber){
+        $agency = returnAgency($listingNumber);
+        $first3 = substr($agency['phoneNum'], 0, 3);
+        $next3 = substr($agency['phoneNum'], 3, 3);
+        $last4 = substr($agency['phoneNum'], 6, 4);
+        echo "(" . $first3 . ") " . $next3 . "-" . $last4;
+    }
     
+    function getAgentName($listingNumber){
+        $agent = returnAgent($listingNumber);
+        echo $agent['firstName'] . " " . $agent['lastName'];
+    }
+
+    function getAgentPhone($listingNumber){
+        $agent = returnAgent($listingNumber);
+        $first3 = substr($agent['phoneNum'], 0, 3);
+        $next3 = substr($agent['phoneNum'], 3, 3);
+        $last4 = substr($agent['phoneNum'], 6, 4);
+        echo "(" . $first3 . ") " . $next3 . "-" . $last4;
+    }
+
+    function getAgentEmail($listingNumber){
+        $agent = returnAgent($listingNumber);
+        echo $agent['email'];
+    }
 ?>

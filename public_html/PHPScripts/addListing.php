@@ -140,19 +140,19 @@
     //Now, add the images that the user uploaded, if any
 
     for($i = 0; $i < count($_FILES['photoPath']['name']); $i++){
-        do{
-            $num = 0;
-            $uploadFile = $imageDirectory . $num .basename($_FILES['photoPath']['name'][$i]);
-            move_uploaded_file($_FILES['photoPath']['tmp_name'][$i], $uploadFile);
-            //we've uploaded the file, now we need to upload the image reference to the database
-            $result = $connection->query("INSERT INTO `ListingPhoto` (`photoPath`, `MLSNumber`) VALUES ('$uploadFile', '$mlsNum')");
-            $num++;
-        } while ($result == 0 && $num < 100); 
+        $uploadFile = $imageDirectory . basename($_FILES['photoPath']['name'][$i]);
+        move_uploaded_file($_FILES['photoPath']['tmp_name'][$i], $uploadFile);
+        //we've uploaded the file, now we need to upload the image reference to the database
+        $result = $connection->query("INSERT INTO `ListingPhoto` (`photoPath`, `MLSNumber`) VALUES ('$uploadFile', '$mlsNum')");
 
-        if($result == 0){
-            setMessage("There was an error inserting the image to the database" . $connection->error);
-            header("Location: ../add_listing.php");
-            die;
+        if($result == 1){
+            $num = 1;
+            while($result != 1){ //This will try to protect against duplicates
+                $uploadFile = $imageDirectory . $num . basename($_FILES['photoPath']['name'][$i]);
+                move_uploaded_file($_FILES['photoPath']['tmp_name'][$i], $uploadFile);
+                $result = $connection->query("INSERT INTO `ListingPhoto` (`photoPath`, `MLSNumber`) VALUES ('$uploadFile', '$mlsNum')");
+                $num++;
+            }
         }
     }
 
