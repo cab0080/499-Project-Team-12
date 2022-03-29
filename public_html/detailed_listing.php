@@ -64,6 +64,9 @@
             </div>
             <div class="row">
                 <div class="col"><button class="btn btn-primary" type="button">Request Showing</button></div>
+                <?php if($_SESSION['username'] == getAgentUsername($_GET['number'])) : ?>
+                    <div class="col"><a onclick="return confirm('Are you sure you want to delete this listing from tucasana? This cannot be undone');" href="PHPScripts/deleteListing.php" class="btn btn-primary" type="button">Delete listing</a></div>
+                <?php endif ?>
             </div>
         </div>
         <div id="listing-details" style="margin-top: 20px;">
