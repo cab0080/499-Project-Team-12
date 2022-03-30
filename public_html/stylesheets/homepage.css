@@ -11,6 +11,18 @@ body {
   margin: 0px;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .navbar {
   background: #00d5ffa8;
   height: 100px;
@@ -58,4 +70,8 @@ header h1 {
 .listing-agent {
   font-size: 0.7em;
   margin-top: 5px;
+}
+
+.rangeFilter div {
+  display: inline-block;
 }

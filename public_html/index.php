@@ -39,28 +39,32 @@
           Filter
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <form class="px-4 py-3">
-            <div class="mb-3">
-              <label for="areaStartFilter" class="form-label">Min sqft</label>
-              <input type="number" class="form-control" id="areaStartFilter" placeholder="min" min="0">
+          <form class="px-4 py-3" method="get" id="filter">
+            <div class="rangeFilter">
+              <div class="mb-3">
+                <label for="areaStartFilter" class="form-label">Min sqft</label>
+                <input type="number" class="form-control" id="areaStartFilter" name="areaStart" placeholder="min" min="0">
+              </div>
+              <div class="mb-3">
+                <label for="areaEndFilter" class="form-label">Max sqft</label>
+                <input type="number" class="form-control" id="areaEndFilter" name="areaEnd" placeholder="max">
+              </div>
             </div>
-            <div class="mb-3">
-              <label for="areaEndFilter" class="form-label">Max sqft</label>
-              <input type="number" class="form-control" id="areaEndFilter" placeholder="max">
-            </div>
-            <div class="mb-3">
-              <label for="priceStartFilter" class="form-label">Min price</label>
-              <input type="number" class="form-control" id="priceStartFilter" placeholder="min" min="0">
-            </div>
-            <div class="mb-3">
-              <label for="priceEndFilter" class="form-label">Max price</label>
-              <input type="number" class="form-control" id="priceEndFilter" placeholder="max">
+            <div class="rangeFilter">
+              <div class="mb-3">
+                <label for="priceStartFilter" class="form-label">Min price</label>
+                <input type="number" class="form-control" id="priceStartFilter" name="priceStart" placeholder="min" min="0">
+              </div>
+              <div class="mb-3">
+                <label for="priceEndFilter" class="form-label">Max price</label>
+                <input type="number" class="form-control" id="priceEndFilter" name="priceEnd" placeholder="max">
+              </div>
             </div>
             <div class="mb-3">
               <label for="zipFilter" class="form-label">Zip code</label>
-              <input type="number" class="form-control" id="zipFilter" placeholder="enter zip">
+              <input type="number" class="form-control" id="zipFilter" name="zip" placeholder="enter zip">
             </div>
-            <button type="submit" class="btn btn-primary">Apply</button>
+            <button class="btn btn-primary" form="filter">Apply</button>
           </form>
         </div>
       </div>
