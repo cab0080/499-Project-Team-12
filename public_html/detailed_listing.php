@@ -45,6 +45,7 @@
             <div class="row">
                 <div class="col">
                     <h1 id="price" style="font-weight: bold;">$<?php getPrice($_GET['number']) ?></h1>
+                    <p>Last updated <?php getPriceDatetime($_GET['number']) ?></p>
                 </div>
             </div>
             <div class="row">
@@ -64,6 +65,21 @@
             </div>
             <div class="row">
                 <div class="col"><button class="btn btn-primary" type="button">Request Showing</button></div>
+                <?php if($_SESSION['username'] == getAgentUsername($_GET['number'])) : ?>
+                    <div class="col">
+                        <div class="dropdown">
+                            <button class="btn btn-primary" type="button" data-bs-toggle="dropdown">Update Price</button>
+                            <div class="dropdown-menu">
+                                <form method="post" action="PHPScripts/editPrice.php">
+                                    <label>Enter the new price here</label>
+                                    <input type="number" name="price" placeholder="Price"></input>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col"><a onclick="return confirm('Are you sure you want to delete this listing from tucasana? This cannot be undone');" href="PHPScripts/deleteListing.php" class="btn btn-primary" type="button">Delete listing</a></div>
+                <?php endif ?>
             </div>
         </div>
         <div id="listing-details" style="margin-top: 20px;">
