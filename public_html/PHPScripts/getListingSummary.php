@@ -168,4 +168,13 @@
         $agent = returnAgent($listingNumber);
         return $agent['username'];
     }
+
+    function getPriceDateTime($listingNumber){
+        $connection = OpenCon();
+        $sql = "SELECT * FROM `ListingPrice` WHERE MLSNumber = '$listingNumber' ORDER BY `changedDatetime` DESC";
+        $result = $connection->query($sql);
+        $price = $result->fetch_assoc();
+        $time = date_parse($price['changedDatetime']);
+        echo $time['month'] . "/" . $time['day'] . "/" . $time['year'];
+    }
 ?>
