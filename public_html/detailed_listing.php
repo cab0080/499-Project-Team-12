@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col"><button class="btn btn-primary" type="button">Request Showing</button></div>
+                <div class="col"><button class="btn btn-primary" type="button" data-bs-target="#contact-agent" data-bs-toggle="modal">Request Showing</button></div>
                 <?php if($_SESSION['username'] == getAgentUsername($_GET['number'])) : ?>
                     <div class="col">
                         <div class="dropdown">
@@ -140,6 +140,25 @@
                             </ul>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contact-agent" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Contact Agent</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="mb-3"><input class="form-control" type="text" name="buyerName" placeholder="Full Name" required /></div>
+                        <div class="mb-3"><input class="form-control" type="tel" name="buyerPhoneNumber" placeholder="Phone" required /></div>
+                        <div class="mb-3"><input class="form-control" type="email" name="buyerEmail" placeholder="Email" required /></div>
+                        <div class="mb-3"><textarea class="form-control" name="message" placeholder="Message" rows="14" required></textarea></div>
+                        <div class="mb-3"><button class="btn btn-primary" type="submit">Send </button></div>
+                    </form>
                 </div>
             </div>
         </div>
