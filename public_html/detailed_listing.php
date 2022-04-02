@@ -47,6 +47,9 @@
                     <h1 id="price" style="font-weight: bold;">$<?php getPrice($_GET['number']) ?></h1>
                     <p>Last updated <?php getPriceDatetime($_GET['number']) ?></p>
                 </div>
+                <div class="col">
+                    <p style="color: #10B629; font-weight: bold;"><?php echoListingAvailable($_GET['number']) ?></p>
+                </div>
             </div>
             <div class="row">
                 <div class="col">
@@ -79,6 +82,9 @@
                         </div>
                     </div>
                     <div class="col"><a onclick="return confirm('Are you sure you want to delete this listing from tucasana? This cannot be undone');" href="PHPScripts/deleteListing.php" class="btn btn-primary" type="button">Delete listing</a></div>
+                    <?php if(listingIsAvailable($_GET['number'])) : ?>
+                        <div class="col"><a onclick="return confirm('Mark this listing as sold?');" href="PHPScripts/sellListing.php" class="btn btn-primary" type="button">Mark as sold</a></div>
+                    <?php endif ?>
                 <?php endif ?>
             </div>
         </div>
