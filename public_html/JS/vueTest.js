@@ -11,7 +11,12 @@ var app = new Vue({
       filterRecords: function(){
         const params = new URLSearchParams(window.location.search);
         for (const [key, value] of params) {
-          $("input[name=" + key + "]").attr("value", value);
+          type = $("input[name=" + key + "]").attr("type")
+          if (type == "number" || type == "text") {
+            $("input[name=" + key + "]").attr("value", value);
+          } else if (type == "checkbox" && value == "on") {
+            $("input[name=" + key + "]").attr("checked", "checked");
+          }
         }
         axios.get('PHPScripts/fetchListings.php', { params })
         .then(function (listing_results) {
