@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col"><label class="form-label">Lot Size</label><input class="form-control" type="number" name="lotSize" min="0" step="0.1" style="width: 500px;"></div>
+            <div class="col"><label class="form-label">Lot Size</label><input class="form-control" type="number" name="lotSize" min="0" step="0.01" style="width: 500px;"></div>
         </div>
         <div class="row">
             <div class="col"><label class="form-label">Square Footage</label><input class="form-control" type="number" name="area" min="1" step="0.1" style="width: 500px;"></div>
@@ -137,7 +137,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <p>Remember to verify.</p><p style="color: #c90000"><?php printMessage(); ?></p><button class="btn btn-primary" type="submit">Submit</button><button class="btn btn-primary" type="button" style="margin-left: 170px;">Cancel</button>
+                <p>Remember to verify.</p><p style="color: #c90000"><?php printMessage(); ?></p><button class="btn btn-primary" type="submit">Submit</button><a href="index.php" class="btn btn-primary" type="button" style="margin-left: 170px;">Cancel</a>
             </div>
         </div>
     </form>
