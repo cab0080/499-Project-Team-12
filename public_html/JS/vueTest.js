@@ -4,11 +4,15 @@ var app = new Vue({
       mls: "",
       street: "",
       price: "",
+
       listings: []
     },
     methods: {
       filterRecords: function(){
         const params = new URLSearchParams(window.location.search);
+        for (const [key, value] of params) {
+          $("input[name=" + key + "]").attr("value", value);
+        }
         axios.get('PHPScripts/fetchListings.php', { params })
         .then(function (listing_results) {
           app.listings = listing_results.data;
