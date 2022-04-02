@@ -1,7 +1,7 @@
 <?php
     function OpenCon()
      {
-     $dbhost = "162.241.224.47";
+     $dbhost = "localhost";
      $dbuser = "avgmzvmy_admin";
      $dbpass = "preston";
      $db = "avgmzvmy_WPQDF";

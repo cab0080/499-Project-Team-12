@@ -50,7 +50,7 @@
         $connection = OpenCon();
         $result = $connection->query("SELECT * FROM `ListingPrice` WHERE MLSNumber = '$listingNumber' ORDER BY changedDatetime DESC");
         $row = $result->fetch_assoc();
-        echo $row['price'];
+        echo number_format($row['price']);
         CloseCon($connection);
     }
 
@@ -58,7 +58,7 @@
         $connection = OpenCon();
         $result = $connection->query("SELECT area FROM `Listing` WHERE MLSNumber = '$listingNumber'");
         $row = $result->fetch_assoc();
-        echo $row['area'];
+        echo number_format($row['area']);
         CloseCon($connection);
     }
 
