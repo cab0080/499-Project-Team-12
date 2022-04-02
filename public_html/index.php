@@ -36,7 +36,7 @@
   <div id="listing-container">
     <div class="listing-panel">
       <div class="dropdown">
-        <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
           Filter
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -64,6 +64,10 @@
             <div class="mb-3">
               <label for="zipFilter" class="form-label">Zip code</label>
               <input type="number" class="form-control" id="zipFilter" name="zip" placeholder="enter zip">
+            </div>
+            <div class="mb-3">
+              <input type="checkbox" id="showSold" name="showSold">
+              <label for="showSold" class="form-label">Show sold listings</label>
             </div>
             <button class="btn btn-primary" form="filter">Apply</button>
           </form>
