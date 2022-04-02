@@ -177,4 +177,24 @@
         $time = date_parse($price['changedDatetime']);
         echo $time['month'] . "/" . $time['day'] . "/" . $time['year'];
     }
+
+    function listingIsAvailable($listingNumber){
+        $listing = returnListing($listingNumber);
+        if($listing['status'] == 'available'){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function echoListingAvailable($listingNumber){
+        $listing = returnListing($listingNumber);
+        if($listing['status'] == 'available'){
+            echo "<p style='color: #10B629; font-weight: bold;'>" . 'This listing is still available.' . "</p>";
+        }
+        else{
+            echo "<p style='color: #F11D1D; font-weight: bold;'>" . 'This listing has been sold. ' . "</p>";
+        }
+    }
 ?>
