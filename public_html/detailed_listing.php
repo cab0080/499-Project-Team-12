@@ -18,7 +18,7 @@
     <header>
         <div class="banner"></div>
         <div class="tucasanacom">tucasana.com</div>
-        <button id="homeButton" class="btn btn-primary pull-right" type="button">Home</button>
+        <a href="index.php" id="homeButton" class="btn btn-primary pull-right" type="button">Home</a>
     </header>
     <div class="container" style="margin-top: 115px;width: 1000px;">
         <div class="carousel slide" data-bs-ride="carousel" id="photo_carousel" style="height: 460px;">
@@ -45,6 +45,10 @@
             <div class="row">
                 <div class="col">
                     <h1 id="price" style="font-weight: bold;">$<?php getPrice($_GET['number']) ?></h1>
+                    <p>Last updated <?php getPriceDatetime($_GET['number']) ?></p>
+                </div>
+                <div class="col">
+                    <p style="color: #10B629; font-weight: bold;"><?php echoListingAvailable($_GET['number']) ?></p>
                 </div>
             </div>
             <div class="row">
@@ -53,7 +57,7 @@
                         <li class="list-inline-item"><span id="numBed"><?php getBedrooms($_GET['number']) ?></span>&nbsp;bed&nbsp;</li>
                         <li class="list-inline-item"><span id="numBath"><?php getBathrooms($_GET['number']) ?></span>&nbsp;bath&nbsp;</li>
                         <li class="list-inline-item"><span id="area"><?php getArea($_GET['number']) ?></span>&nbsp;sqft&nbsp;</li>
-                        <li class="list-inline-item"><span id="lotSize"><?php getLotsize($_GET['number']) ?></span>&nbsp;lot size</li>
+                        <li class="list-inline-item"><span id="lotSize"><?php getLotsize($_GET['number']) ?></span>&nbsp;acres</li>
                     </ul>
                 </div>
             </div>
@@ -63,7 +67,25 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col"><button class="btn btn-primary" type="button">Request Showing</button></div>
+                <div class="col"><button class="btn btn-primary" type="button" data-bs-target="#contact-agent" data-bs-toggle="modal">Request Showing</button></div>
+                <?php if($_SESSION['username'] == getAgentUsername($_GET['number'])) : ?>
+                    <div class="col">
+                        <div class="dropdown">
+                            <button class="btn btn-primary" type="button" data-bs-toggle="dropdown">Update Price</button>
+                            <div class="dropdown-menu">
+                                <form method="post" action="PHPScripts/editPrice.php">
+                                    <label>Enter the new price here</label>
+                                    <input type="number" name="price" placeholder="Price"></input>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col"><a onclick="return confirm('Are you sure you want to delete this listing from tucasana? This cannot be undone');" href="PHPScripts/deleteListing.php" class="btn btn-primary" type="button">Delete listing</a></div>
+                    <?php if(listingIsAvailable($_GET['number'])) : ?>
+                        <div class="col"><a onclick="return confirm('Mark this listing as sold?');" href="PHPScripts/sellListing.php" class="btn btn-primary" type="button">Mark as sold</a></div>
+                    <?php endif ?>
+                <?php endif ?>
             </div>
         </div>
         <div id="listing-details" style="margin-top: 20px;">
@@ -84,16 +106,17 @@
                 <div class="accordion-item" id="featuresRooms">
                     <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#listing-details .item-2" aria-expanded="false" aria-controls="listing-details .item-2">Features and Rooms</button></h2>
                     <div class="accordion-collapse collapse item-2" role="tabpanel">
-                        <div class="accordion-body">
-                            <div id="room">
-                                <h3 id="roomType">Bedroom</h3>
+                        <div class="accordion-body" id="room-list">
+                            <div id="room" v-for="room in rooms">
+                                <h3 id="roomType">{{room.type}}</h3>
                                 <ul>
-                                    <li><span>Features:&nbsp;</span>features here</li>
-                                    <li><span>Area:&nbsp;</span>100</li>
-                                    <li><span>Length:&nbsp;</span>20</li>
+                                    <li><span>Features:&nbsp;</span>{{room.features}}</li>
+                                    <li><span>Area:&nbsp;</span>{{room.area}}</li>
+                                    <li><span>Length:&nbsp;</span>{{room.length}}</li>
                                 </ul>
                             </div>
                         </div>
+                        <script src="js/getRooms.js"></script>
                     </div>
                 </div>
                 <div class="accordion-item" id="subSchools">
@@ -101,10 +124,10 @@
                     <div class="accordion-collapse collapse item-3" role="tabpanel">
                         <div class="accordion-body">
                             <ul>
-                                <li><span id="subdivision">Subdivision:&nbsp;</span>Subdivision here.</li>
-                                <li><span id="elemSchoolDistrict">Elementary School:&nbsp;</span>Elementary School here.</li>
-                                <li><span id="midSchoolDistrict">Middle School:&nbsp;</span>Middle School here.</li>
-                                <li><span id="highSchoolDistrict">High School:&nbsp;</span>High School here.</li>
+                                <li><span id="subdivision">Subdivision:&nbsp;</span><?php getSubdivision($_GET['number'])?></li>
+                                <li><span id="elemSchoolDistrict">Elementary School:&nbsp;</span><?php getElementary($_GET['number'])?></li>
+                                <li><span id="midSchoolDistrict">Middle School:&nbsp;</span><?php getMiddle($_GET['number'])?></li>
+                                <li><span id="highSchoolDistrict">High School:&nbsp;</span><?php getHigh($_GET['number'])?></li>
                             </ul>
                         </div>
                     </div>
@@ -114,15 +137,34 @@
                     <div class="accordion-collapse collapse item-4" role="tabpanel">
                         <div class="accordion-body">
                             <ul>
-                                <li><span id="agencyName">Listing Agency:&nbsp;</span>Agency here.</li>
-                                <li><span id="agencyAddress">Agency Address:&nbsp;</span>Agency Address here.</li>
-                                <li><span id="agenyPhoneNum">Agency Phone Number:&nbsp;</span>123-456-7890</li>
-                                <li><span id="agentName">Listing Agent:&nbsp;</span>Agent Name here.</li>
-                                <li><span id="agentPhoneNum">Agent Phone Number:&nbsp;</span>123-456-7890<br></li>
-                                <li><span id="agentEmail">Agent Email:&nbsp;</span>example@gmail.com</li>
+                                <li><span id="agencyName">Listing Agency:&nbsp;</span><?php getAgency($_GET['number']) ?></li>
+                                <li><span id="agencyAddress">Agency Address:&nbsp;</span><?php getAgencyAddress($_GET['number']) ?></li>
+                                <li><span id="agenyPhoneNum">Agency Phone Number:&nbsp;</span><?php getAgencyPhone($_GET['number']) ?></li>
+                                <li><span id="agentName">Listing Agent:&nbsp;</span><?php getAgentName($_GET['number']) ?></li>
+                                <li><span id="agentPhoneNum">Agent Phone Number:&nbsp;</span><?php getAgentPhone($_GET['number']) ?><br></li>
+                                <li><span id="agentEmail">Agent Email:&nbsp;</span><?php getAgentEmail($_GET['number']) ?></li>
                             </ul>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contact-agent" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Contact Agent</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="mb-3"><input class="form-control" type="text" name="buyerName" placeholder="Full Name" required /></div>
+                        <div class="mb-3"><input class="form-control" type="tel" name="buyerPhoneNumber" placeholder="Phone" required /></div>
+                        <div class="mb-3"><input class="form-control" type="email" name="buyerEmail" placeholder="Email" required /></div>
+                        <div class="mb-3"><textarea class="form-control" name="message" placeholder="Message" rows="14" required></textarea></div>
+                        <div class="mb-3"><button class="btn btn-primary" type="submit">Send </button></div>
+                    </form>
                 </div>
             </div>
         </div>
