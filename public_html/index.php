@@ -17,7 +17,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">tucasana.com</a>
       <ul class="navbar-nav">
-        <?php  if ($_SESSION['loggedin']) : ?>
+        <?php  if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) : ?>
           <li class="nav-item">
             <a class="btn btn-primary add-listing" href="add_listing.php" role="button">New Listing <b>+</b></a>
           </li>
@@ -65,10 +65,16 @@
               <label for="zipFilter" class="form-label">Zip code</label>
               <input type="number" class="form-control" id="zipFilter" name="zip" placeholder="enter zip">
             </div>
-            <div class="mb-3">
+            <div class="mb-1">
               <input type="checkbox" id="showSold" name="showSold">
               <label for="showSold" class="form-label">Show sold listings</label>
             </div>
+            <?php  if ($_SESSION['loggedin']) : ?>
+            <div class="mb-1">
+              <input type="checkbox" id="myList" name="myList">
+              <label for="myList" class="form-label">Show only my listings</label>
+            </div>
+            <?php endif ?>
             <button class="btn btn-primary" form="filter">Apply</button>
           </form>
         </div>

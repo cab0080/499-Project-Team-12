@@ -11,7 +11,7 @@ var app = new Vue({
       filterRecords: function(){
         const params = new URLSearchParams(window.location.search);
         for (const [key, value] of params) {
-          type = $("input[name=" + key + "]").attr("type")
+          type = $("input[name=" + key + "]").attr("type");
           if (type == "number" || type == "text") {
             $("input[name=" + key + "]").attr("value", value);
           } else if (type == "checkbox" && value == "on") {
