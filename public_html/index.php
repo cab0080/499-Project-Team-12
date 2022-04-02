@@ -15,7 +15,7 @@
 <body>
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">tucasana.com</a>
+      <a class="navbar-brand" href="index.php">tucasana.com</a>
       <ul class="navbar-nav">
         <?php  if ($_SESSION['loggedin']) : ?>
           <li class="nav-item">
