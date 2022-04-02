@@ -7,8 +7,9 @@ var app = new Vue({
       listings: []
     },
     methods: {
-      allRecords: function(){
-        axios.get('PHPScripts/fetchListings.php')
+      filterRecords: function(){
+        const params = new URLSearchParams(window.location.search);
+        axios.get('PHPScripts/fetchListings.php', { params })
         .then(function (listing_results) {
           app.listings = listing_results.data;
         })
@@ -18,14 +19,14 @@ var app = new Vue({
       }
     },
     created: function(){
-      this.allRecords();
+      this.filterRecords();
     },
     filters: {
-        usPrice: function (value) {
-          return "$" + parseInt(value).toLocaleString("en-US");
-        },
-        usInteger: function(value) {
-          return parseInt(value).toLocaleString("en-US");
-        }
+      usPrice: function (value) {
+        return "$" + parseInt(value).toLocaleString("en-US");
+      },
+      usInteger: function(value) {
+        return parseInt(value).toLocaleString("en-US");
+      }
     },
   })
