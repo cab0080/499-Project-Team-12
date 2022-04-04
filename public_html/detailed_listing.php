@@ -67,7 +67,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col"><button class="btn btn-primary" type="button" data-bs-target="#contact-agent" data-bs-toggle="modal">Request Showing</button></div>
+                <?php if($_GET['request'] == false) : ?>
+                    <div class="col"><button class="btn btn-primary" type="button" data-bs-target="#contact-agent" data-bs-toggle="modal">Request Showing</button></div>
+                <?php else : ?>
+                    <div class="col"><p>Showing Requested</p></div>
+                <?php endif ?>
                 <?php if($_SESSION['username'] == getAgentUsername($_GET['number'])) : ?>
                     <div class="col">
                         <div class="dropdown">

@@ -28,5 +28,6 @@
 
     mail($agentEmail, "Tucasana: Showing Request", $emailText);
 
-    echo "Your request has been sent to the listing agent. \nThank you.";
+    $url = "../detailed_listing.php?number=" . $listingNumber . "&request=false";
+    header("Location: $url");
 ?>
