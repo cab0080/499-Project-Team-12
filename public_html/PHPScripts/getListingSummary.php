@@ -164,6 +164,11 @@
         echo $agent['email'];
     }
 
+    function returnAgentEmail($listingNumber){
+        $agent = returnAgent($listingNumber);
+        return $agent['email'];
+    }
+
     function getAgentUsername($listingNumber){
         $agent = returnAgent($listingNumber);
         return $agent['username'];

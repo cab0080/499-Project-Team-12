@@ -158,7 +158,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post">
+                    <form method="post" action="PHPScripts/sendRequest.php">
                         <div class="mb-3"><input class="form-control" type="text" name="buyerName" placeholder="Full Name" required /></div>
                         <div class="mb-3"><input class="form-control" type="tel" name="buyerPhoneNumber" placeholder="Phone" required /></div>
                         <div class="mb-3"><input class="form-control" type="email" name="buyerEmail" placeholder="Email" required /></div>
