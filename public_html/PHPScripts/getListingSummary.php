@@ -197,4 +197,20 @@
             echo "<p style='color: #F11D1D; font-weight: bold;'>" . 'This listing has been sold. ' . "</p>";
         }
     }
+
+    function updateHitCount($listingNumber, $viewType) {
+        $connection = OpenCon();
+        $result = $connection->query("SELECT `agentHitCount`, `visitorHitCount` FROM `Listing` WHERE MLSNumber = '$listingNumber'");
+        $row = $result->fetch_assoc();
+        if($viewType == "agent") {
+            $row['agentHitCount'] += 1;
+            $newCount = $row['agentHitCount'];
+            $connection->query("UPDATE `Listing` SET `agentHitCount` = '$newCount' WHERE `MLSNumber` = '$listingNumber'");
+        } else if ($viewType == "visitor") {
+            $row['visitorHitCount'] += 1;
+            $newCount = $row['visitorHitCount'];
+            $connection->query("UPDATE `Listing` SET `visitorHitCount` = '$newCount' WHERE `MLSNumber` = '$listingNumber'");
+        }
+        CloseCon($connection);
+    }
 ?>

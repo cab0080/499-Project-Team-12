@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tucasana!</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -14,9 +15,9 @@
 <body>
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">tucasana.com</a>
+      <a class="navbar-brand" href="index.php">tucasana.com</a>
       <ul class="navbar-nav">
-        <?php  if ($_SESSION['loggedin']) : ?>
+        <?php  if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) : ?>
           <li class="nav-item">
             <a class="btn btn-primary add-listing" href="add_listing.php" role="button">New Listing <b>+</b></a>
           </li>
@@ -35,7 +36,7 @@
   <div id="listing-container">
     <div class="listing-panel">
       <div class="dropdown">
-        <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
           Filter
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -64,11 +65,21 @@
               <label for="zipFilter" class="form-label">Zip code</label>
               <input type="number" class="form-control" id="zipFilter" name="zip" placeholder="enter zip">
             </div>
+            <div class="mb-1">
+              <input type="checkbox" id="showSold" name="showSold">
+              <label for="showSold" class="form-label">Show sold listings</label>
+            </div>
+            <?php  if ($_SESSION['loggedin']) : ?>
+            <div class="mb-1">
+              <input type="checkbox" id="myList" name="myList">
+              <label for="myList" class="form-label">Show only my listings</label>
+            </div>
+            <?php endif ?>
             <button class="btn btn-primary" form="filter">Apply</button>
           </form>
         </div>
       </div>
-      <div class="row row-cols-3">
+      <div class="row row-cols-xs-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 ">
         <div class="col" v-for='listing in listings'>
           <div class="card h-100 listing" style="width: 18rem;">
             <img v-bind:src="listing.thumbnailPath" v-bind:alt="'MLS# ' + listing.MLSNumber + ' thumbnail'" width="100" height="75" class="card-img-top">

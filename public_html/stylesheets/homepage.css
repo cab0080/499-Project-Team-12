@@ -1,5 +1,5 @@
 .center {
-    text-align: center;
+  text-align: center;
 }
 
 div.login-info {
@@ -57,9 +57,14 @@ header h1 {
   margin-bottom: 40px;
 }
 
+#listing-container {
+  width: 95%;
+  margin: auto;
+}
+
 .listing-panel {
-  margin: 15px auto;
-  width: 50%;
+  width: 100%;
+  margin: 10px auto;
 }
 
 .listing-address {
