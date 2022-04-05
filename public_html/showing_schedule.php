@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/globals.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <?php include 'PHPScripts/errorMessage.php' ?>
+    <?php include 'PHPScripts/connect.php' ?>
 </head>
 
 <body style="margin: 0; background: #f5f5f5" >
@@ -19,6 +22,7 @@
     </header>
     <div class="row" style="margin-top: 250px;padding: 10px;">
         <div class="col"><button class="btn btn-primary" type="button" data-bs-target="#add-showing" data-bs-toggle="modal">+ Add New Showing</button></div>
+        <div class="col"><p style="color:#db0909;"><?php printMessage(); ?></p></div>
     </div>
     <div class="table-responsive">
         <table id="showing-table" class="table table-striped table-bordered">
@@ -73,18 +77,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post">
+                    <form method="post" action="PHPScripts/createShowing.php">
                         <div class="mb-3"><input class="form-control" type="number" name="MLSNumber" placeholder="MLS #" /></div>
-                        <div class="mb-3"><input class="form-control" type="text" name="address" placeholder="Property Address"  /></div>
                         <div class="mb-3"><label class="form-label">Showing Start Time</label><input class="form-control" type="datetime-local" name="startDatetime"  /></div>
                         <div class="mb-3"><label class="form-label">Showing End Time</label><input class="form-control" type="datetime-local" name="endDatetime" /></div>
-                        <div class="mb-3"><input class="form-control" type="text" name="buyerName" placeholder="Buyer Name"  /></div>
-                        <div class="mb-3"><input class="form-control" type="tel" name="buyerPhone" placeholder="Buyer Phone"  /></div>
-                        <div class="mb-3"><input class="form-control" type="email" name="buyerEmail" placeholder="Buyer Email"  /></div>
-                        <div class="mb-3"><input class="form-control" type="text" name="listingAgent" placeholder="Listing Agent"  /></div>
-                        <div class="mb-3"><input class="form-control" type="text" name="listingAgency" placeholder="Listing Company"  /></div>
-                        <div class="mb-3"><input class="form-control" type="text" name="showingAgent" placeholder="Showing Agent"  /></div>
-                        <div class="mb-3"><input class="form-control" type="text" name="showingAgency" placeholder="Showing Company"  /></div>
+                        <div class="mb-3"><input class="form-control" required type="text" name="buyerName" placeholder="Buyer Name"  /></div>
+                        <div class="mb-3"><input class="form-control" required type="tel" name="buyerPhone" placeholder="Buyer Phone"  /></div>
+                        <div class="mb-3"><input class="form-control" required type="email" name="buyerEmail" placeholder="Buyer Email"  /></div>
+                        <div class="mb-3"><label class="form-label">Showing Agent</label><select required class="form-select" name="showingAgentID">
+                                <?php include 'PHPScripts/getAgentIDOptions.php' ?>
+                            </select></div>
                         <div class="mb-3"><button class="btn btn-primary" type="submit">Add</button></div>
                     </form>
                 </div>

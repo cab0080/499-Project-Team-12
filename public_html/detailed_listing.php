@@ -67,10 +67,14 @@
                 </div>
             </div>
             <div class="row">
-                <?php if($_GET['request'] == false) : ?>
-                    <div class="col"><button class="btn btn-primary" type="button" data-bs-target="#contact-agent" data-bs-toggle="modal">Request Showing</button></div>
-                <?php else : ?>
+                <?php if($_SESSION['loggedin'] == false) : ?>
+                    <?php if($_GET['request'] == false) : ?>
+                        <div class="col"><button class="btn btn-primary" type="button" data-bs-target="#contact-agent" data-bs-toggle="modal">Request Showing</button></div>
+                    <?php else : ?>
                     <div class="col"><p>Showing Requested</p></div>
+                    <?php endif ?>
+                <?php else : ?>
+                    <div class="col"><a class="btn btn-primary" type="button" href="showing_schedule.php" target="blank">Schedule Showing</a></div>
                 <?php endif ?>
                 <?php if($_SESSION['username'] == getAgentUsername($_GET['number'])) : ?>
                     <div class="col">

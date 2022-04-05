@@ -4,6 +4,7 @@
 
 <head>
     <?php include 'PHPScripts/errorMessage.php'; ?>
+    <?php include 'PHPScripts/connect.php'; ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <link rel="stylesheet" type="text/css" href="stylesheets/add-listing-page.css" />
@@ -31,11 +32,6 @@
                     <option value="Apartment">Apartment</option>
                     <option value="Condo">Condo</option>
                 </select></div>
-        </div>
-        <div class="row">
-            <div class="col"><label class="form-label">Listing Agency</label><select required style="width: 500px;" class="form-select" name="listingAgencyID">
-                <?php include "PHPScripts/getAgencyIDOptions.php" ?>
-            </select></div>
         </div>
         <div class="row">
             <div class="col"><label class="form-label">Price</label><input required class="form-control" type="number" name="price" min="0" step="0.01" style="width: 500px;"></div>
