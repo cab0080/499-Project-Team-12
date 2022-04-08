@@ -1,5 +1,5 @@
 <?php
-    //include 'connect.php';
+    include 'connect.php';
     $connection = OpenCon();
 
     $sql = "SELECT * FROM `Agency`";

@@ -6,7 +6,7 @@
     $user = $_SESSION['username'];
     $listingMLSNumber = $_POST['MLSnumber'];
     $mlsNum = $listingMLSNumber;
-    $listingDetailPath = "../detailed_listing.php?number=" . $mlsNum;
+    $listingDetailPath = "detailed_listing.php?number=" . $mlsNum;
     $listingdescription = $_POST['description'];
     $listingdwellingType = $_POST['dwellingType'];
     //$listinglistingAgencyID = $_POST['listingAgencyID']; THIS IS REMOVED SINCE WE ARE NO LONGER ASKING THE USER TO ENTER THEIR AGENCY
@@ -66,7 +66,7 @@
     $listinghighSchoolDistrict = $_POST['highSchoolDistrict'];
     
 
-    $imageDirectory = '../img/';
+    $imageDirectory = 'img/';
     $thumbnailPath = $imageDirectory . basename($_FILES['photoPath']['name'][0]);
 
 
