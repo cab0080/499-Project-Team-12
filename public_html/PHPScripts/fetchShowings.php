@@ -7,7 +7,8 @@
     INNER JOIN Agent lag ON lag.username = ls.listingAgentUsername
     INNER JOIN Agent sag ON sag.username = sh.showingAgentUsername
     INNER JOIN Agency lc ON lc.agencyID = lag.agencyID
-    INNER JOIN Agency sc ON sc.agencyID = sag.agencyID";
+    INNER JOIN Agency sc ON sc.agencyID = sag.agencyID
+    ORDER BY sh.startDateTime";
 
     $result = $connection->query($sql);
     $showingList = array();
