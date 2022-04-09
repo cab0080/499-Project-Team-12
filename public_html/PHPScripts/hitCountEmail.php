@@ -7,7 +7,7 @@ FROM `Listing` INNER JOIN `Agent` ON username = listingAgentUsername WHERE `stat
 
 while($row = $result->fetch_array(MYSQLI_ASSOC)){
   $to = $row['email'];
-  $subject = "Today's view count for your listing at " . $row['street'];
+  $subject = "Today's View Count for " . $row['street'];
 
   $agentCount = $row['agentHitCount'] - $row['prevAgentHits'];
   $visitorCount = $row['visitorHitCount'] - $row['prevVisitorHits'];
@@ -19,20 +19,22 @@ while($row = $result->fetch_array(MYSQLI_ASSOC)){
   </head>
   <body>
   <div>
-    <p>MLS Number: {$row['MLSNumber']}</p>
-    <address>{$row['street']}, {$row['city']}, {$row['state']} {$row['zip']}</address>
-    <a href='https://www.tucasana.com{$row['detailPath']}'>View Listing</a>
+    <p><b>MLS#: </b>{$row['MLSNumber']}</p>
+    <b>Address: </b><address style='display: inline;'>{$row['street']}, {$row['city']}, {$row['state']} {$row['zip']}</address>
   </div>
-  <table>
+  <br>
+  <table style='border: 1px solid;border-collapse: collapse;'>
   <tr>
-  <th>Agent Hit Count</th>
-  <th>Visitor Hit Count</th>
+  <th style='border: 1px solid;'>Agent Hit Count</th>
+  <th style='border: 1px solid;'>Visitor Hit Count</th>
   </tr>
   <tr>
-  <td>{$agentCount}</td>
-  <td>{$visitorCount}</td>
+  <td style='border: 1px solid;'>{$agentCount}</td>
+  <td style='border: 1px solid;'>{$visitorCount}</td>
   </tr>
   </table>
+  <br>
+  <a href='https://www.tucasana.com/{$row['detailPath']}'>View Listing</a>
   </body>
   </html>
   ";
@@ -41,9 +43,9 @@ while($row = $result->fetch_array(MYSQLI_ASSOC)){
   $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
   $headers .= 'From: <noreply@tucasana.com>' . "\r\n";
 
-  //mail($to, $subject, $message, $headers);
+  mail($to, $subject, $message, $headers);
 
-  $connection->query("UPDATE `Listing` SET `agentHitCount` = 0, `visitorHitCount` = 0, `prevAgentHits` = {$row['agentHitCount']}, `prevVisitorHits` = {$row['visitorHitCount']}
+  $connection->query("UPDATE `Listing` SET `prevAgentHits` = {$row['agentHitCount']}, `prevVisitorHits` = {$row['visitorHitCount']}
   WHERE `MLSNumber` = {$row['MLSNumber']}");
 }
 
