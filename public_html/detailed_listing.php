@@ -67,7 +67,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col"><button class="btn btn-primary" type="button" data-bs-target="#contact-agent" data-bs-toggle="modal">Request Showing</button></div>
+                <?php if($_SESSION['loggedin'] == false) : ?>
+                    <?php if($_GET['request'] == false) : ?>
+                        <div class="col"><button class="btn btn-primary" type="button" data-bs-target="#contact-agent" data-bs-toggle="modal">Request Showing</button></div>
+                    <?php else : ?>
+                    <div class="col"><p>Showing Requested</p></div>
+                    <?php endif ?>
+                <?php else : ?>
+                    <div class="col"><a class="btn btn-primary" type="button" href="showing_schedule.php" target="blank">Schedule Showing</a></div>
+                <?php endif ?>
                 <?php if($_SESSION['username'] == getAgentUsername($_GET['number'])) : ?>
                     <div class="col">
                         <div class="dropdown">
@@ -158,7 +166,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post">
+                    <form method="post" action="PHPScripts/sendRequest.php">
                         <div class="mb-3"><input class="form-control" type="text" name="buyerName" placeholder="Full Name" required /></div>
                         <div class="mb-3"><input class="form-control" type="tel" name="buyerPhoneNumber" placeholder="Phone" required /></div>
                         <div class="mb-3"><input class="form-control" type="email" name="buyerEmail" placeholder="Email" required /></div>

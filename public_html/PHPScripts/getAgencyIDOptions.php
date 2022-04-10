@@ -10,4 +10,6 @@
         //add an option to the dropdown list
         echo "<option value='" . $agency['agencyID'] . "' >" . $agency['name'] . "</option>";
     }
+
+    CloseCon($connection);
 ?>

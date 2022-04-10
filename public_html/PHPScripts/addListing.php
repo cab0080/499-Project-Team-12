@@ -6,7 +6,7 @@
     $user = $_SESSION['username'];
     $listingMLSNumber = $_POST['MLSnumber'];
     $mlsNum = $listingMLSNumber;
-    $listingDetailPath = "../detailed_listing.php?number=" . $mlsNum;
+    $listingDetailPath = "detailed_listing.php?number=" . $mlsNum;
     $listingdescription = $_POST['description'];
     $listingdwellingType = $_POST['dwellingType'];
     $listingPrice = $_POST['price'];
@@ -65,9 +65,19 @@
     $listinghighSchoolDistrict = $_POST['highSchoolDistrict'];
     
 
-    $imageDirectory = '../img/';
+    $imageDirectory = 'img/';
     $thumbnailPath = $imageDirectory . basename($_FILES['photoPath']['name'][0]);
-    
+
+
+    /*SINCE WE REMOVED THE OPTION TO ENTER THE AGENCY
+    * WE MUST FIGURE OUT WHAT THE AGENCY IS BEFORE WE SUBMIT THIS POST
+    * THE EASIEST WAY I CAN THINK OF IS WITH AN SQL QUERY TO RETURN IT
+    */
+
+    $sql = "SELECT * FROM Agent WHERE username = '$user'";
+    $result = $connection->query($sql);
+    $agent = $result->fetch_assoc();
+    $listinglistingAgencyID = $agent['agencyID'];
     
 
     //Now it's time to insert this thing into the database.
