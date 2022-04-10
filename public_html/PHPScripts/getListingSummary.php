@@ -11,7 +11,7 @@
     }
 
     function returnAgency($listingNumber){
-        $agency = returnListing($listingNumber)['listingAgencyID'];
+        $agency = returnAgent($listingNumber)['agencyID'];
         $sql = "SELECT * FROM `Agency` WHERE agencyID = '$agency'";
         $connection = OpenCon();
         $result = $connection->query($sql);

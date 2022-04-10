@@ -63,7 +63,7 @@
                                 <button class="btn btn-success btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><span class="bi bi-pencil-square"></span></button>
                             </li>
                             <li class="list-inline-item">
-                                <button class="btn btn-danger btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><span class="bi bi-trash-fill"></span></button>
+                                <a class="btn btn-danger btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="Delete" id="deleteButton" href=""><span class="bi bi-trash-fill"></span></a>
                             </li>
                         </ul>
                     </td>
