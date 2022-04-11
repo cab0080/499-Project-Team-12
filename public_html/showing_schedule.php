@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <?php include 'PHPScripts/errorMessage.php' ?>
     <?php include 'PHPScripts/connect.php' ?>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body style="margin: 0; background: #f5f5f5" >
@@ -42,31 +44,32 @@
                     <th style="width: 100px;"></th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>123456789</td>
-                    <td>1234 Internet Street, Madison, Al 35758</td>
-                    <td>2022-03-17 15:00:00<br /><br /></td>
-                    <td>2022-03-17 16:00:00<br /></td>
-                    <td>John Smith</td>
-                    <td>1234567890</td>
-                    <td>john.smith@ex.com</td>
-                    <td>Corey Bouldin</td>
-                    <td>Century 22</td>
-                    <td>Jessica Sanders</td>
-                    <td>Real Estate Company</td>
+            <tbody id="showing-list">
+                <tr v-for="showing in showings">
+                    <td>{{ showing.MLSNumber }}</td>
+                    <td>{{ showing.street }}, {{ showing.city }}, {{ showing.state }} {{showing.zip}}</td>
+                    <td>{{ showing.startDatetime }}<br /><br /></td>
+                    <td>{{ showing.endDatetime }}<br /></td>
+                    <td>{{ showing.buyerName }}</td>
+                    <td>{{ showing.buyerPhoneNumber }}</td>
+                    <td>{{ showing.buyerEmail }}</td>
+                    <td>{{ showing.listingFirstName }} {{ showing.listingLastName }}</td>
+                    <td>{{ showing.listingAgencyName }}</td>
+                    <td>{{ showing.showingFirstName }} {{ showing.showingLastName }}</td>
+                    <td>{{ showing.showingAgencyName }}</td>
                     <td>
                         <ul class="list-inline m-0">
                             <li class="list-inline-item">
                                 <button class="btn btn-success btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><span class="bi bi-pencil-square"></span></button>
                             </li>
                             <li class="list-inline-item">
-                                <button class="btn btn-danger btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><span class="bi bi-trash-fill"></span></button>
+                                <a class="btn btn-danger btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="Delete" id="deleteButton" href=""><span class="bi bi-trash-fill"></span></a>
                             </li>
                         </ul>
                     </td>
                 </tr>
             </tbody>
+            <script src="js/vueShowings.js"></script>
         </table>
     </div>
     <div id="add-showing" class="modal fade" tabindex="-1" aria-hidden="true">

@@ -16,32 +16,32 @@ $zipSet = (isset($_GET['zip']) && $_GET['zip'] != "") ? 1 : 0;
 $agentSet = (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] && isset($_GET['myList']) && $_GET['myList'] == "on") ? 1 : 0;
 
 if($zipSet && $agentSet) {
-   $query = $conn->prepare("SELECT ls.MLSNumber, thumbnailPath, street, city, state, zip, area, listingAgentUsername, listingAgencyID, detailPath, price, status, firstName, lastName, agency.name FROM Listing ls
+   $query = $conn->prepare("SELECT ls.MLSNumber, thumbnailPath, street, city, state, zip, area, listingAgentUsername, detailPath, price, status, firstName, lastName, agency.agencyID, agency.name FROM Listing ls
    INNER JOIN (SELECT MLSNumber, price FROM ListingPrice lp WHERE changedDatetime IN (SELECT MAX(changedDatetime) FROM ListingPrice lp2
-   WHERE lp.MLSNumber = lp2.MLSNumber)) AS pr ON ls.MLSNumber = pr.MLSNumber INNER JOIN (SELECT agencyID, name FROM Agency) AS agency ON ls.listingAgencyID = agency.agencyID 
-   INNER JOIN (SELECT username, firstName, lastName FROM Agent WHERE username=?) AS agent ON ls.listingAgentUsername = agent.username
-   WHERE zip=? AND (area BETWEEN ? AND ?) AND (price BETWEEN ? AND ?) AND status IN ('available', ?) LIMIT 25");
+   WHERE lp.MLSNumber = lp2.MLSNumber)) AS pr ON ls.MLSNumber = pr.MLSNumber INNER JOIN (SELECT username, firstName, lastName, agencyID FROM Agent WHERE username=?) AS agent ON ls.listingAgentUsername = agent.username
+   INNER JOIN (SELECT agencyID, name FROM Agency) AS agency ON agent.agencyID = agency.agencyID
+   WHERE zip=? AND (area BETWEEN ? AND ?) AND (price BETWEEN ? AND ?) AND status IN ('available', ?)");
    $query->bind_param("ssiiiis", $_SESSION['username'], $_GET['zip'], $areaA, $areaB, $priceA, $priceB, $sold);
 } elseif ($zipSet) {
-   $query = $conn->prepare("SELECT ls.MLSNumber, thumbnailPath, street, city, state, zip, area, listingAgentUsername, listingAgencyID, detailPath, price, status, firstName, lastName, agency.name FROM Listing ls
+   $query = $conn->prepare("SELECT ls.MLSNumber, thumbnailPath, street, city, state, zip, area, listingAgentUsername, detailPath, price, status, firstName, lastName, agency.agencyID, agency.name FROM Listing ls
    INNER JOIN (SELECT MLSNumber, price FROM ListingPrice lp WHERE changedDatetime IN (SELECT MAX(changedDatetime) FROM ListingPrice lp2
-   WHERE lp.MLSNumber = lp2.MLSNumber)) AS pr ON ls.MLSNumber = pr.MLSNumber INNER JOIN (SELECT agencyID, name FROM Agency) AS agency ON ls.listingAgencyID = agency.agencyID 
-   INNER JOIN (SELECT username, firstName, lastName FROM Agent) AS agent ON ls.listingAgentUsername = agent.username
-   WHERE zip=? AND (area BETWEEN ? AND ?) AND (price BETWEEN ? AND ?) AND status IN ('available', ?) LIMIT 25");
+   WHERE lp.MLSNumber = lp2.MLSNumber)) AS pr ON ls.MLSNumber = pr.MLSNumber INNER JOIN (SELECT username, firstName, lastName, agencyID FROM Agent) AS agent ON ls.listingAgentUsername = agent.username
+   INNER JOIN (SELECT agencyID, name FROM Agency) AS agency ON agent.agencyID = agency.agencyID 
+   WHERE zip=? AND (area BETWEEN ? AND ?) AND (price BETWEEN ? AND ?) AND status IN ('available', ?)");
    $query->bind_param("siiiis", $_GET['zip'], $areaA, $areaB, $priceA, $priceB, $sold);
 } elseif ($agentSet) {
-   $query = $conn->prepare("SELECT ls.MLSNumber, thumbnailPath, street, city, state, zip, area, listingAgentUsername, listingAgencyID, detailPath, price, status, firstName, lastName, agency.name FROM Listing ls
+   $query = $conn->prepare("SELECT ls.MLSNumber, thumbnailPath, street, city, state, zip, area, listingAgentUsername, detailPath, price, status, firstName, lastName, agency.agencyID, agency.name FROM Listing ls
    INNER JOIN (SELECT MLSNumber, price FROM ListingPrice lp WHERE changedDatetime IN (SELECT MAX(changedDatetime) FROM ListingPrice lp2
-   WHERE lp.MLSNumber = lp2.MLSNumber)) AS pr ON ls.MLSNumber = pr.MLSNumber INNER JOIN (SELECT agencyID, name FROM Agency) AS agency ON ls.listingAgencyID = agency.agencyID 
-   INNER JOIN (SELECT username, firstName, lastName FROM Agent WHERE username=?) AS agent ON ls.listingAgentUsername = agent.username
-   WHERE (area BETWEEN ? AND ?) AND (price BETWEEN ? AND ?) AND status IN ('available', ?) LIMIT 25");
+   WHERE lp.MLSNumber = lp2.MLSNumber)) AS pr ON ls.MLSNumber = pr.MLSNumber INNER JOIN (SELECT username, firstName, lastName, agencyID FROM Agent WHERE username=?) AS agent ON ls.listingAgentUsername = agent.username
+   INNER JOIN (SELECT agencyID, name FROM Agency) AS agency ON agent.agencyID = agency.agencyID 
+   WHERE (area BETWEEN ? AND ?) AND (price BETWEEN ? AND ?) AND status IN ('available', ?)");
    $query->bind_param("siiiis", $_SESSION['username'], $areaA, $areaB, $priceA, $priceB, $sold);
 } else {
-   $query = $conn->prepare("SELECT ls.MLSNumber, thumbnailPath, street, city, state, zip, area, listingAgentUsername, listingAgencyID, detailPath, price, status, firstName, lastName, agency.name FROM Listing ls
+   $query = $conn->prepare("SELECT ls.MLSNumber, thumbnailPath, street, city, state, zip, area, listingAgentUsername, detailPath, price, status, firstName, lastName, agency.agencyID, agency.name FROM Listing ls
    INNER JOIN (SELECT MLSNumber, price FROM ListingPrice lp WHERE changedDatetime IN (SELECT MAX(changedDatetime) FROM ListingPrice lp2
-   WHERE lp.MLSNumber = lp2.MLSNumber)) AS pr ON ls.MLSNumber = pr.MLSNumber
-   INNER JOIN (SELECT agencyID, name FROM Agency) AS agency ON ls.listingAgencyID = agency.agencyID INNER JOIN (SELECT username, firstName, lastName FROM Agent) AS agent ON ls.listingAgentUsername = agent.username 
-   WHERE (area BETWEEN ? AND ?) AND (price BETWEEN ? AND ?) AND status IN ('available', ?) LIMIT 25");
+   WHERE lp.MLSNumber = lp2.MLSNumber)) AS pr ON ls.MLSNumber = pr.MLSNumber INNER JOIN (SELECT username, firstName, lastName, agencyID FROM Agent) AS agent ON ls.listingAgentUsername = agent.username
+   INNER JOIN (SELECT agencyID, name FROM Agency) AS agency ON agent.agencyID = agency.agencyID
+   WHERE (area BETWEEN ? AND ?) AND (price BETWEEN ? AND ?) AND status IN ('available', ?)");
    $query->bind_param("iiiis", $areaA, $areaB, $priceA, $priceB, $sold);
 }
 $query->execute();
