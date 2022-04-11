@@ -40,6 +40,10 @@ input[type=number] {
   margin: 10px 20px 0 0;
 }
 
+.dropdown-toggle {
+  margin: 10px 20px 0 0;
+}
+
 header h1 {
   margin: 0;
 }

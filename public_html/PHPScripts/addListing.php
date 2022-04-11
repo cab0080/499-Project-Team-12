@@ -9,7 +9,6 @@
     $listingDetailPath = "detailed_listing.php?number=" . $mlsNum;
     $listingdescription = $_POST['description'];
     $listingdwellingType = $_POST['dwellingType'];
-    //$listinglistingAgencyID = $_POST['listingAgencyID']; THIS IS REMOVED SINCE WE ARE NO LONGER ASKING THE USER TO ENTER THEIR AGENCY
     $listingPrice = $_POST['price'];
     $rooms = array(); //initialize empty array for the rooms
 
@@ -86,7 +85,7 @@
     //Changing this to prepare statement. 
     //After it is prepared, we will bind the variables, then execute
     $statement = $connection->prepare("INSERT INTO `Listing` (`MLSNumber`, `thumbnailPath`, `street`, `city`, `state`, `zip`, 
-        `area`, `listingAgentUsername`, `listingAgencyID`, `detailPath`, `status`, `description`, `lotSize`, `dwellingType`, 
+        `area`, `listingAgentUsername`, `detailPath`, `status`, `description`, `lotSize`, `dwellingType`, 
         `builtYear`, `subdivision`, `elemSchoolDisctrict`, `midSchoolDistrict`, `highSchoolDistrict`, `fencing`, `detachedGarage`, 
         `agentHitCount`, `visitorHitCount`, `shoppingAreas`, `postedDatetime`, `lastEditDatetime`)
          VALUES (
@@ -97,8 +96,7 @@
             '$listingstate', 
             '$listingzip', 
             '$listingarea', 
-            '$user', 
-            '$listinglistingAgencyID', 
+            '$user',
             '$listingDetailPath', 
             'available', 
             ?, 
