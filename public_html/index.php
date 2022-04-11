@@ -19,6 +19,16 @@
       <ul class="navbar-nav">
         <?php  if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) : ?>
           <li class="nav-item">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="margin: 10px 20px 0 0;">Document Templates </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="doc_templates/closing_cost_estimate_template.pdf" target="_blank">Estimated Closing Cost Statement</a>
+                <a class="dropdown-item" href="doc_templates/sales_contract_template.pdf" target="_blank">Sales Contract</a>
+                <a class="dropdown-item" href="doc_templates/maintenance_request_template.pdf" target="_blank">Request For Repairs Statement</a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
             <a class="btn btn-primary add-listing" href="add_listing.php" role="button">New Listing <b>+</b></a>
           </li>
           <li class="nav-item">

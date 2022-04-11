@@ -91,7 +91,7 @@
                     </div>
                     <div class="col"><a onclick="return confirm('Are you sure you want to delete this listing from tucasana? This cannot be undone');" href="PHPScripts/deleteListing.php" class="btn btn-primary" type="button">Delete listing</a></div>
                     <?php if(listingIsAvailable($_GET['number'])) : ?>
-                        <div class="col"><a onclick="return confirm('Mark this listing as sold?');" href="PHPScripts/sellListing.php" class="btn btn-primary" type="button">Mark as sold</a></div>
+                        <div class="col"><button class="btn btn-primary" type="button" data-bs-target="#mark-sold" data-bs-toggle="modal">Mark as Sold</button></div>
                     <?php endif ?>
                 <?php endif ?>
             </div>
@@ -172,6 +172,27 @@
                         <div class="mb-3"><input class="form-control" type="email" name="buyerEmail" placeholder="Email" required /></div>
                         <div class="mb-3"><textarea class="form-control" name="message" placeholder="Message" rows="14" required></textarea></div>
                         <div class="mb-3"><button class="btn btn-primary" type="submit">Send </button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="mark-sold" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Mark Listing as Sold</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="PHPScripts/sellListing.php">
+                        <div class="mb-3"><label class="form-label">Closing Date</label><input class="form-control" type="date" name="closingDate" required /></div>
+                        <div class="mb-3"><label class="form-label">Selling Price</label><input class="form-control" type="number" placeholder="Price" step="0.01" min="0" name="soldPrice" /></div>
+                        <div class="mb-3"><label class="form-label">Selling Agent</label><select required class="form-select" name="sellingAgentID"><?php include 'PHPScripts/getAgentIDOptions.php' ?></select></div>
+                        <div class="mb-3"><label class="form-label">Selling Agent Fee</label><input class="form-control" type="number" placeholder="Fee" step="0.01" min="0" name="sellingAgentFee" /></div>
+                        <div class="mb-3"><label class="form-label">Buying Agent</label><select required class="form-select" name="buyingAgentID"><?php include 'PHPScripts/getAgentIDOptions.php' ?></select></div>
+                        <div class="mb-3"><label class="form-label">Buying Agent Fee</label><input class="form-control" type="number" placeholder="Fee" step="0.01" min="0" name="buyingAgentFee" /></div>
+                        <div class="mb-3"><button class="btn btn-primary" type="submit">Submit</button></div>
                     </form>
                 </div>
             </div>
