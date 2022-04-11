@@ -63,7 +63,7 @@
                                 <button class="btn btn-success btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><span class="bi bi-pencil-square"></span></button>
                             </li>
                             <li class="list-inline-item">
-                                <a class="btn btn-danger btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="Delete" id="deleteButton" href=""><span class="bi bi-trash-fill"></span></a>
+                                <a class="btn btn-danger btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="Delete" id="deleteButton" v-bind:href="'PHPScripts/deleteShowing.php?MLS=' + showing.MLSNumber + '&time=' + showing.startDatetime"><span class="bi bi-trash-fill"></span></a>
                             </li>
                         </ul>
                     </td>

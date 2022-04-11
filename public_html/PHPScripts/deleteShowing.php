@@ -1,4 +1,5 @@
 <?php
-    $buyer = $_GET['buyer'];
-    echo "deleting the showing for the buyer: " . $buyer;
+    $number = $_GET['MLS'];
+    $time = $_GET['time'];
+    echo "delete showing where mls=" . $number . " and time=" . $time;
 ?>
