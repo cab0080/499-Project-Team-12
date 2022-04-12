@@ -63,6 +63,13 @@
     $listingelemSchoolDistrict = $_POST['elemSchoolDistrict'];
     $listingmidSchoolDistrict = $_POST['midSchoolDistrict'];
     $listinghighSchoolDistrict = $_POST['highSchoolDistrict'];
+    $listingArmCode = $_POST['armCode'];
+    $listingDisarmCode = $_POST['disarmCode'];
+    $listingPassCode = $_POST['passCode'];
+    $listingAlarmNotes = $_POST['alarmNotes'];
+    $listingLockCode = $_POST['lockCode'];
+    $listingOccupied = $_POST['occupied'];
+
     
 
     $imageDirectory = 'img/';
@@ -125,6 +132,20 @@
         header("Location: ../add_listing.php");
         die;
     }
+
+    $unsoldStatement = $connection->prepare("INSERT INTO `UnsoldListing` (`armCode`, `disarmCode`, `passcode`, `alarmNotes`, `occupied`, `lockboxCode`, 
+        `MLSNumber`)
+         VALUES (
+            '$listingArmCode',
+            '$listingDisarmCode',
+            '$listingPassCode',
+            '$listingAlarmNotes',
+            '$listingOccupied',
+            '$listingLockCode',
+            '$listingMLSNumber')
+    ");
+
+    $unsoldStatement->execute();
 
     //Add the price
     $result = $connection->query("INSERT INTO `ListingPrice` (`MLSNumber`, `changedDatetime`, `price`) VALUES ('$mlsNum', CURRENT_TIMESTAMP, '$listingPrice')");
