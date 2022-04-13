@@ -22,6 +22,7 @@
 <div class="tucasanacom">tucasana.com</div>
 <div class="editlisting">Edit Listing</div></header>
     <form style="margin-top: 250px;padding: 20px;" enctype="multipart/form-data" method="post" action="PHPScripts/editListing.php">
+        <input type="text" hidden name="oldMLS" value='<?php echo $_GET['number'] ?>'>
         <div class="row" style="margin-bottom: 25px;">
             <div class="col"><label class="form-label">MLS Number</label><input required class="form-control" type="text" style="width: 800px;" name="MLSnumber" value='<?php echo $_GET['number'] ?>'></div>
         </div>
