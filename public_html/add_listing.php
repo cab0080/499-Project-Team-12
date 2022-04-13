@@ -144,7 +144,7 @@
             <div class="col"><label class="form-label">Lockbox Code</label><input class="form-control" type="text" name="lockCode" style="width: 500px;"></div>
         </div>
         <div class="row">
-            <div class="col"><label class="form-label">Currently Occupied</label><select class="form-select" name="occupied">
+            <div class="col"><label class="form-label">Currently Occupied</label><select class="form-select" name="occupied" style="width: 500px;">
                     <option value="1" selected>Yes</option>
                     <option value="0">No</option>
                 </select>

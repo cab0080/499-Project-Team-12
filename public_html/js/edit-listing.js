@@ -20,3 +20,7 @@ function removeRoom() {
 
     room.parentNode.removeChild(room);
 }
+
+function setSelected(selectName, optionVal) {
+    $("select[name='" + selectName + "'] option[value='" + optionVal + "']").attr("selected", true);
+}
