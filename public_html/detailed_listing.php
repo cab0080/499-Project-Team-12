@@ -44,8 +44,8 @@
         <div id="listing-summary">
             <div class="row">
                 <div class="col">
-                    <h1 id="price" style="font-weight: bold;">$<?php getPrice($_GET['number']) ?></h1>
-                    <p>Last updated <?php getPriceDatetime($_GET['number']) ?></p>
+                    <h1 id="price" style="font-weight: bold;">$<?php echo getPrice($_GET['number']) ?></h1>
+                    <p>Last updated <?php echo getPriceDatetime($_GET['number']) ?></p>
                 </div>
                 <div class="col">
                     <p style="color: #10B629; font-weight: bold;"><?php echoListingAvailable($_GET['number']) ?></p>
@@ -54,16 +54,16 @@
             <div class="row">
                 <div class="col">
                     <ul class="list-inline" style="padding: 0px;">
-                        <li class="list-inline-item"><span id="numBed"><?php getBedrooms($_GET['number']) ?></span>&nbsp;bed&nbsp;</li>
-                        <li class="list-inline-item"><span id="numBath"><?php getBathrooms($_GET['number']) ?></span>&nbsp;bath&nbsp;</li>
-                        <li class="list-inline-item"><span id="area"><?php getArea($_GET['number']) ?></span>&nbsp;sqft&nbsp;</li>
-                        <li class="list-inline-item"><span id="lotSize"><?php getLotsize($_GET['number']) ?></span>&nbsp;acres</li>
+                        <li class="list-inline-item"><span id="numBed"><?php echo getBedrooms($_GET['number']) ?></span>&nbsp;bed&nbsp;</li>
+                        <li class="list-inline-item"><span id="numBath"><?php echo getBathrooms($_GET['number']) ?></span>&nbsp;bath&nbsp;</li>
+                        <li class="list-inline-item"><span id="area"><?php echo getArea($_GET['number']) ?></span>&nbsp;sqft&nbsp;</li>
+                        <li class="list-inline-item"><span id="lotSize"><?php echo getLotsize($_GET['number']) ?></span>&nbsp;acres</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <h2 id="address"><?php getAddress($_GET['number']) ?></h2>
+                    <h2 id="address"><?php echo getAddress($_GET['number']) ?></h2>
                 </div>
             </div>
             <div class="row">
@@ -78,16 +78,7 @@
                 <?php endif ?>
                 <?php if($_SESSION['username'] == getAgentUsername($_GET['number'])) : ?>
                     <div class="col">
-                        <div class="dropdown">
-                            <button class="btn btn-primary" type="button" data-bs-toggle="dropdown">Update Price</button>
-                            <div class="dropdown-menu">
-                                <form method="post" action="PHPScripts/editPrice.php">
-                                    <label>Enter the new price here</label>
-                                    <input type="number" name="price" placeholder="Price"></input>
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                </form>
-                            </div>
-                        </div>
+                        <?php echo "<a class='btn btn-primary' type='button' href='edit_listing.php?number={$_GET['number']}' target='blank'>Edit Listing</a>"; ?>
                     </div>
                     <div class="col"><a onclick="return confirm('Are you sure you want to delete this listing from tucasana? This cannot be undone');" href="PHPScripts/deleteListing.php" class="btn btn-primary" type="button">Delete listing</a></div>
                     <?php if(listingIsAvailable($_GET['number'])) : ?>
@@ -103,11 +94,11 @@
                     <div class="accordion-collapse collapse item-1" role="tabpanel">
                         <div class="accordion-body">
                             <ul>
-                                <li><span id="dwellingType">Property Type:&nbsp;</span><?php getPropertyType($_GET['number']) ?></li>
-                                <li><span id="fencing">Fenced:&nbsp;</span><?php getFenced($_GET['number']) ?></li>
-                                <li><span id="detachedGarage">Detached Garage:&nbsp;</span><?php getGarage($_GET['number']) ?></li>
+                                <li><span id="dwellingType">Property Type:&nbsp;</span><?php echo getPropertyType($_GET['number']) ?></li>
+                                <li><span id="fencing">Fenced:&nbsp;</span><?php echo getFenced($_GET['number']) ?></li>
+                                <li><span id="detachedGarage">Detached Garage:&nbsp;</span><?php echo getGarage($_GET['number']) ?></li>
                             </ul>
-                            <p id="description" class="mb-0"><?php getPropertyDescription($_GET['number']) ?></p>
+                            <p id="description" class="mb-0"><?php echo getPropertyDescription($_GET['number']) ?></p>
                         </div>
                     </div>
                 </div>
@@ -132,10 +123,10 @@
                     <div class="accordion-collapse collapse item-3" role="tabpanel">
                         <div class="accordion-body">
                             <ul>
-                                <li><span id="subdivision">Subdivision:&nbsp;</span><?php getSubdivision($_GET['number'])?></li>
-                                <li><span id="elemSchoolDistrict">Elementary School:&nbsp;</span><?php getElementary($_GET['number'])?></li>
-                                <li><span id="midSchoolDistrict">Middle School:&nbsp;</span><?php getMiddle($_GET['number'])?></li>
-                                <li><span id="highSchoolDistrict">High School:&nbsp;</span><?php getHigh($_GET['number'])?></li>
+                                <li><span id="subdivision">Subdivision:&nbsp;</span><?php echo getSubdivision($_GET['number'])?></li>
+                                <li><span id="elemSchoolDistrict">Elementary School:&nbsp;</span><?php echo getElementary($_GET['number'])?></li>
+                                <li><span id="midSchoolDistrict">Middle School:&nbsp;</span><?php echo getMiddle($_GET['number'])?></li>
+                                <li><span id="highSchoolDistrict">High School:&nbsp;</span><?php echo getHigh($_GET['number'])?></li>
                             </ul>
                         </div>
                     </div>
@@ -145,12 +136,12 @@
                     <div class="accordion-collapse collapse item-4" role="tabpanel">
                         <div class="accordion-body">
                             <ul>
-                                <li><span id="agencyName">Listing Agency:&nbsp;</span><?php getAgency($_GET['number']) ?></li>
-                                <li><span id="agencyAddress">Agency Address:&nbsp;</span><?php getAgencyAddress($_GET['number']) ?></li>
-                                <li><span id="agenyPhoneNum">Agency Phone Number:&nbsp;</span><?php getAgencyPhone($_GET['number']) ?></li>
-                                <li><span id="agentName">Listing Agent:&nbsp;</span><?php getAgentName($_GET['number']) ?></li>
-                                <li><span id="agentPhoneNum">Agent Phone Number:&nbsp;</span><?php getAgentPhone($_GET['number']) ?><br></li>
-                                <li><span id="agentEmail">Agent Email:&nbsp;</span><?php getAgentEmail($_GET['number']) ?></li>
+                                <li><span id="agencyName">Listing Agency:&nbsp;</span><?php echo getAgency($_GET['number']) ?></li>
+                                <li><span id="agencyAddress">Agency Address:&nbsp;</span><?php echo getAgencyAddress($_GET['number']) ?></li>
+                                <li><span id="agenyPhoneNum">Agency Phone Number:&nbsp;</span><?php echo getAgencyPhone($_GET['number']) ?></li>
+                                <li><span id="agentName">Listing Agent:&nbsp;</span><?php echo getAgentName($_GET['number']) ?></li>
+                                <li><span id="agentPhoneNum">Agent Phone Number:&nbsp;</span><?php echo getAgentPhone($_GET['number']) ?><br></li>
+                                <li><span id="agentEmail">Agent Email:&nbsp;</span><?php echo getAgentEmail($_GET['number']) ?></li>
                             </ul>
                         </div>
                     </div>

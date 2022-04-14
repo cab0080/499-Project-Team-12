@@ -1,9 +1,10 @@
 <?php
     session_start();
-    include 'connect.php';
     include 'errorMessage.php';
+    include 'getListingSummary.php';
     $connection = OpenCon();
     $user = $_SESSION['username'];
+    $oldMLS = $_POST['oldMLS'];
     $listingMLSNumber = $_POST['MLSnumber'];
     $mlsNum = $listingMLSNumber;
     $listingDetailPath = "detailed_listing.php?number=" . $mlsNum;
@@ -11,15 +12,6 @@
     $listingdwellingType = $_POST['dwellingType'];
     $listingPrice = $_POST['price'];
     $rooms = array(); //initialize empty array for the rooms
-
-    /*For loop explanation:
-        PHP should be recieving an array of inputs for each room.
-        Each room will be sort of treated like its own form.
-            Because for instance, there are two rooms, so there are two "type" names submitted with the form
-        Each of these different room attributes will be an array
-        Each of these arrays SHOULD have the same length
-        So we will execute this loop as many times as there are elements in these arrays.
-    */
 
     $roomCount = count($_POST['type']);
     for($i = 0; $i < $roomCount; $i++){
@@ -72,7 +64,7 @@
 
     
 
-    $imageDirectory = '../img/';
+    $imageDirectory = 'img/';
     $thumbnailPath = $imageDirectory . basename($_FILES['photoPath']['name'][0]);
 
 
@@ -80,78 +72,32 @@
     * WE MUST FIGURE OUT WHAT THE AGENCY IS BEFORE WE SUBMIT THIS POST
     * THE EASIEST WAY I CAN THINK OF IS WITH AN SQL QUERY TO RETURN IT
     */
-
-    $sql = "SELECT * FROM Agent WHERE username = '$user'";
-    $result = $connection->query($sql);
-    $agent = $result->fetch_assoc();
-    $listinglistingAgencyID = $agent['agencyID'];
     
-
-    //Now it's time to insert this thing into the database.
-    //Big long SQL query:
-    //Changing this to prepare statement. 
-    //After it is prepared, we will bind the variables, then execute
-    $statement = $connection->prepare("INSERT INTO `Listing` (`MLSNumber`, `thumbnailPath`, `street`, `city`, `state`, `zip`, 
-        `area`, `listingAgentUsername`, `detailPath`, `status`, `description`, `lotSize`, `dwellingType`, 
-        `builtYear`, `subdivision`, `elemSchoolDisctrict`, `midSchoolDistrict`, `highSchoolDistrict`, `fencing`, `detachedGarage`, 
-        `agentHitCount`, `visitorHitCount`, `shoppingAreas`, `postedDatetime`, `lastEditDatetime`)
-         VALUES (
-            '$listingMLSNumber', 
-            '$thumbnailPath', 
-            ?, 
-            ?, 
-            '$listingstate', 
-            '$listingzip', 
-            '$listingarea', 
-            '$user',
-            '$listingDetailPath', 
-            'available', 
-            ?, 
-            '$listinglotSize', 
-            '$listingdwellingType', 
-            NULL, 
-            ?, 
-            ?, 
-            ?, 
-            ?, 
-            '$listingfencing', 
-            '$listingdetachedGarage', 
-            '0', 
-            '0', 
-            NULL, 
-            CURRENT_TIMESTAMP, 
-            CURRENT_TIMESTAMP)
-    ");
+    $statement = $connection->prepare("UPDATE `Listing` SET `MLSNumber`='$listingMLSNumber', `thumbnailPath`='$thumbnailPath', `street`=?, `city`=?, `state`='$listingstate', `zip`='$listingzip', 
+        `area`='$listingarea', `detailPath`='$listingDetailPath', `description`=?, `lotSize`='$listinglotSize', `dwellingType`='$listingdwellingType', `subdivision`=?, `elemSchoolDisctrict`=?,
+        `midSchoolDistrict`=?, `highSchoolDistrict`=?, `fencing`='$listingfencing', `detachedGarage`='$listingdetachedGarage', `lastEditDatetime`=CURRENT_TIMESTAMP WHERE `MLSNumber`='$oldMLS'");
     
     $statement->bind_param("sssssss", $listingstreet, $listingcity, $listingdescription, $listingsubdivision, $listingelemSchoolDistrict, $listingmidSchoolDistrict, $listinghighSchoolDistrict);
     
     //Now we need to make sure that the query worked
 
     if(!$statement->execute()){ //statement is actually executed HERE
-        setMessage("There was an error adding the post to the database.<br>" . $connection->error);
-        header("Location: ../add_listing.php");
+        setMessage("There was an error editing the listing in the database.<br>" . $connection->error);
+        header("Location: ../edit_listing.php");
         die;
     }
 
-    $unsoldStatement = $connection->prepare("INSERT INTO `UnsoldListing` (`armCode`, `disarmCode`, `passcode`, `alarmNotes`, `occupied`, `lockboxCode`, 
-        `MLSNumber`)
-         VALUES (
-            '$listingArmCode',
-            '$listingDisarmCode',
-            '$listingPassCode',
-            '$listingAlarmNotes',
-            '$listingOccupied',
-            '$listingLockCode',
-            '$listingMLSNumber')
-    ");
+    $unsoldStatement = $connection->prepare("UPDATE `UnsoldListing` SET `armCode`='$listingArmCode', `disarmCode`='$listingDisarmCode', `passcode`='$listingPassCode', `alarmNotes`='$listingAlarmNotes',
+        `occupied`='$listingOccupied', `lockboxCode`='$listingLockCode' WHERE `MLSNumber`=$mlsNum");
 
     $unsoldStatement->execute();
 
-    //Add the price
-    $result = $connection->query("INSERT INTO `ListingPrice` (`MLSNumber`, `changedDatetime`, `price`) VALUES ('$mlsNum', CURRENT_TIMESTAMP, '$listingPrice')");
+    if($listingPrice != str_replace(',', '', getPrice($mlsNum))) {
+        $result = $connection->query("INSERT INTO `ListingPrice` (`MLSNumber`, `changedDatetime`, `price`) VALUES ('$mlsNum', CURRENT_TIMESTAMP, '$listingPrice')");
+    }
 
     //Next, add the rooms
-    $counter = 0;
+/*     $counter = 0;
     for($i=0;$i<$roomCount;$i++){
         $type = $rooms[$i]['type'];
         $features = $rooms[$i]['features'];
@@ -164,22 +110,14 @@
             header("Location: ../add_listing.php");
             die;
         }
-    }
+    } */
 
     //Now, add the images that the user uploaded, if any
-
+/* 
     for($i = 0; $i < count($_FILES['photoPath']['name']); $i++){
         $uploadFile = $imageDirectory . basename($_FILES['photoPath']['name'][$i]);
         move_uploaded_file($_FILES['photoPath']['tmp_name'][$i], $uploadFile);
         //we've uploaded the file, now we need to upload the image reference to the database
-
-        /**
-         * QUICK FIX: remove the ../ from the image path so that the path is actually correct
-         *              Going to do this by simply trimming the first 3 characters off of the string $uploadfile
-         */
-        
-         $uploadFile = substr($uploadFile, 3);
-
         $result = $connection->query("INSERT INTO `ListingPhoto` (`photoPath`, `MLSNumber`) VALUES ('$uploadFile', '$mlsNum')");
 
         if($result == 1){
@@ -191,7 +129,7 @@
                 $num++;
             }
         }
-    }
+    } */
 
     CloseCon($connection);
 
