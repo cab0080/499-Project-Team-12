@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="stylesheets/homepage.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <?php include 'PHPScripts/getUserRole.php' ?>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg">
@@ -31,6 +32,11 @@
           <li class="nav-item">
             <a class="btn btn-primary add-listing" href="add_listing.php" role="button">New Listing <b>+</b></a>
           </li>
+          <?php if(getUserRole() == 'manager') : ?>
+          <li>
+            <a class="btn btn-primary" href="open_listing_report.php" role="button">Open listing report</a>
+          </li>
+          <?php endif ?>
           <li class="nav-item">
             Logged in as <?php echo $_SESSION['username']; ?>
             <a class="nav-link" href="PHPScripts/signout.php">Click here to log out</a>
