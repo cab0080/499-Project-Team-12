@@ -146,6 +146,28 @@
                         </div>
                     </div>
                 </div>
+                <?php if($_SESSION['loggedin'] == true) : ?>
+                    <div class="accordion-item" id="homeAlarmInfo">
+                        <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#listing-details .item-5" aria-expanded="false" aria-controls="listing-details .item-5">Home Alarm Information</button></h2>
+                        <div class="accordion-collapse collapse item-5" role="tabpanel">
+                            <div class="accordion-body">
+                                <ul>
+                                    <?php if(getOccupied($_GET['number']) == 1) : ?>
+                                        <li><span id="occupied">Home Occupied:&nbsp;</span>Yes</li>
+                                        <li><span id="armCode">Arm Code:&nbsp;</span><?php echo getArmCode($_GET['number']) ?></li>
+                                        <li><span id="disarmCode">Disarm Code:&nbsp;</span><?php echo getDisarmCode($_GET['number']) ?></li>
+                                        <li><span id="passcode">Passcode:&nbsp;</span><?php echo getPassCode($_GET['number']) ?></li>
+                                        <li><span id="alarmNotes">Alarm Notes:&nbsp;</span><?php echo getAlarmNotes($_GET['number']) ?><br></li>
+                                        <li><span id="lockboxCode">Lockbox Code:&nbsp;</span><?php echo getLockCode($_GET['number']) ?></li>
+                                    <?php else : ?>
+                                        <li><span id="occupied">Home Occupied: No</span></li>
+                                        <li><span id="lockboxCode">Lockbox Code:&nbsp;</span><?php echo getLockCode($_GET['number']) ?></li>
+                                    <?php endif ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif ?>
             </div>
         </div>
     </div>
