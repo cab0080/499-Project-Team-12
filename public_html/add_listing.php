@@ -129,6 +129,28 @@
             <div class="col"><label class="form-label">High School District</label><input class="form-control" type="text" name="highSchoolDistrict" style="width: 500px;"></div>
         </div>
         <div class="row">
+            <div class="col"><label class="form-label">Arm Code</label><input class="form-control" type="text" name="armCode" style="width: 500px;"></div>
+        </div>
+        <div class="row">
+            <div class="col"><label class="form-label">Disarm Code</label><input class="form-control" type="text" name="disarmCode" style="width: 500px;"></div>
+        </div>
+        <div class="row">
+            <div class="col"><label class="form-label">Alarm Passcode</label><input class="form-control" type="text" name="passCode" style="width: 500px;"></div>
+        </div>
+        <div class="row">
+            <div class="col"><label class="form-label">Alarm Notes</label><input class="form-control" type="text" name="alarmNotes" style="width: 500px;"></div>
+        </div>
+        <div class="row">
+            <div class="col"><label class="form-label">Lockbox Code</label><input class="form-control" type="text" name="lockCode" style="width: 500px;"></div>
+        </div>
+        <div class="row">
+            <div class="col"><label class="form-label">Currently Occupied</label><select class="form-select" name="occupied" style="width: 500px;">
+                    <option value="1" selected>Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
             <div class="col"><label class="form-label">Photos (Select all files at once.)</label><input class="form-control" type="file" accept="image/*" name="photoPath[]" multiple required style="width: 500px;"></div>
         </div>
         <div class="row">

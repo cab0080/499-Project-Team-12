@@ -10,6 +10,14 @@
         return $row;
     }
 
+    function returnUnsoldListing($listingNumber){
+        $connection = OpenCon();
+        $result = $connection->query("SELECT * FROM `UnsoldListing` WHERE MLSNumber = '$listingNumber'");
+        $row = $result->fetch_assoc();
+        CloseCon($connection);
+        return $row;
+    }
+
     function returnAgency($listingNumber){
         $agency = returnAgent($listingNumber)['agencyID'];
         $sql = "SELECT * FROM `Agency` WHERE agencyID = '$agency'";
@@ -34,7 +42,7 @@
         $connection = OpenCon();
         $result = $connection->query("SELECT type, COUNT(*) AS bathroomCount FROM Room WHERE MLSNumber = '$listingNumber' AND type='Bathroom'");
         $row = $result->fetch_assoc();
-        echo $row['bathroomCount'];
+        return $row['bathroomCount'];
         CloseCon($connection);
     }
 
@@ -42,7 +50,7 @@
         $connection = OpenCon();
         $result = $connection->query("SELECT type, COUNT(*) AS bedCount FROM Room WHERE MLSNumber = '$listingNumber' AND type='Bedroom'");
         $row = $result->fetch_assoc();
-        echo $row['bedCount'];
+        return $row['bedCount'];
         CloseCon($connection);
     }
 
@@ -50,7 +58,7 @@
         $connection = OpenCon();
         $result = $connection->query("SELECT * FROM `ListingPrice` WHERE MLSNumber = '$listingNumber' ORDER BY changedDatetime DESC");
         $row = $result->fetch_assoc();
-        echo number_format($row['price']);
+        return number_format($row['price']);
         CloseCon($connection);
     }
 
@@ -58,7 +66,7 @@
         $connection = OpenCon();
         $result = $connection->query("SELECT area FROM `Listing` WHERE MLSNumber = '$listingNumber'");
         $row = $result->fetch_assoc();
-        echo number_format($row['area']);
+        return number_format($row['area']);
         CloseCon($connection);
     }
 
@@ -66,7 +74,7 @@
         $connection = OpenCon();
         $result = $connection->query("SELECT lotSize FROM `Listing` WHERE MLSNumber = '$listingNumber'");
         $row = $result->fetch_assoc();
-        echo $row['lotSize'];
+        return $row['lotSize'];
         CloseCon($connection);
     }
 
@@ -74,68 +82,133 @@
         $connection = OpenCon();
         $result = $connection->query("SELECT * FROM `Listing` WHERE MLSNumber = '$listingNumber'");
         $row = $result->fetch_assoc();
-        echo $row['street'] . ", " . $row['city'] . ", " . $row['state'] . " " . $row['zip'];
+        return $row['street'] . ", " . $row['city'] . ", " . $row['state'] . " " . $row['zip'];
+        CloseCon($connection);
+    }
+
+    function getStreet($listingNumber){
+        $connection = OpenCon();
+        $result = $connection->query("SELECT street FROM `Listing` WHERE MLSNumber = '$listingNumber'");
+        $row = $result->fetch_assoc();
+        return $row['street'];
+        CloseCon($connection);
+    }
+
+    function getCity($listingNumber){
+        $connection = OpenCon();
+        $result = $connection->query("SELECT city FROM `Listing` WHERE MLSNumber = '$listingNumber'");
+        $row = $result->fetch_assoc();
+        return $row['city'];
+        CloseCon($connection);
+    }
+
+    function getState($listingNumber){
+        $connection = OpenCon();
+        $result = $connection->query("SELECT state FROM `Listing` WHERE MLSNumber = '$listingNumber'");
+        $row = $result->fetch_assoc();
+        return $row['state'];
+        CloseCon($connection);
+    }
+
+    function getZip($listingNumber){
+        $connection = OpenCon();
+        $result = $connection->query("SELECT zip FROM `Listing` WHERE MLSNumber = '$listingNumber'");
+        $row = $result->fetch_assoc();
+        return $row['zip'];
+        CloseCon($connection);
+    }
+
+    function getOccupied($listingNumber){
+        $connection = OpenCon();
+        $result = $connection->query("SELECT occupied FROM `UnsoldListing` WHERE MLSNumber = '$listingNumber'");
+        $row = $result->fetch_assoc();
+        return $row['occupied'];
         CloseCon($connection);
     }
 
     function getPropertyType($listingNumber){
         $row = returnListing($listingNumber);
-        echo $row['dwellingType'];
+        return $row['dwellingType'];
     }
 
     function getFenced($listingNumber){
         $row = returnListing($listingNumber);
         if($row['fencing'] == 0){
-            echo "No";
+            return "No";
         }
         else{
-            echo "Yes";
+            return "Yes";
         }
     }
 
     function getGarage($listingNumber){
         $row = returnListing($listingNumber);
         if($row['detachedGarage'] == 0){
-            echo "No";
+            return "No";
         }
         else{
-            echo "Yes";
+            return "Yes";
         }
     }
 
     function getPropertyDescription($listingNumber){
         $row = returnListing($listingNumber);
-        echo $row['description'];
+        return $row['description'];
     }
 
     function getSubdivision($listingNumber){
         $row = returnListing($listingNumber);
-        echo $row['subdivision'];
+        return $row['subdivision'];
     }
 
     function getElementary($listingNumber){
         $row = returnListing($listingNumber);
-        echo $row['elemSchoolDisctrict'];//typo on the database column LOL
+        return $row['elemSchoolDisctrict'];//typo on the database column LOL
     }
 
     function getMiddle($listingNumber){
         $row = returnListing($listingNumber);
-        echo $row['midSchoolDistrict'];
+        return $row['midSchoolDistrict'];
     }
 
     function getHigh($listingNumber){
         $row = returnListing($listingNumber);
-        echo $row['highSchoolDistrict'];
+        return $row['highSchoolDistrict'];
+    }
+
+    function getArmCode($listingNumber){
+        $row = returnUnsoldListing($listingNumber);
+        return $row['armCode'];
+    }
+
+    function getDisarmCode($listingNumber){
+        $row = returnUnsoldListing($listingNumber);
+        return $row['disarmCode'];
+    }
+
+    function getPassCode($listingNumber){
+        $row = returnUnsoldListing($listingNumber);
+        return $row['passcode'];
+    }
+
+    function getAlarmNotes($listingNumber){
+        $row = returnUnsoldListing($listingNumber);
+        return $row['alarmNotes'];
+    }
+
+    function getLockCode($listingNumber){
+        $row = returnUnsoldListing($listingNumber);
+        return $row['lockboxCode'];
     }
 
     function getAgency($listingNumber){
         $agency = returnAgency($listingNumber);
-        echo $agency['name'];
+        return $agency['name'];
     }
 
     function getAgencyAddress($listingNumber){
         $agency = returnAgency($listingNumber);
-        echo $agency['street'] . ", " . $agency['city'] . ", " . $agency['state'] . " " .$agency['zip'];
+        return $agency['street'] . ", " . $agency['city'] . ", " . $agency['state'] . " " .$agency['zip'];
     }
 
     function getAgencyPhone($listingNumber){
@@ -143,7 +216,7 @@
         $first3 = substr($agency['phoneNum'], 0, 3);
         $next3 = substr($agency['phoneNum'], 3, 3);
         $last4 = substr($agency['phoneNum'], 6, 4);
-        echo "(" . $first3 . ") " . $next3 . "-" . $last4;
+        return "(" . $first3 . ") " . $next3 . "-" . $last4;
     }
     
     function getAgentName($listingNumber){
