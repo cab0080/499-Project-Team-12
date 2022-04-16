@@ -172,6 +172,14 @@
         $uploadFile = $imageDirectory . basename($_FILES['photoPath']['name'][$i]);
         move_uploaded_file($_FILES['photoPath']['tmp_name'][$i], $uploadFile);
         //we've uploaded the file, now we need to upload the image reference to the database
+
+        /**
+         * QUICK FIX: remove the ../ from the image path so that the path is actually correct
+         *              Going to do this by simply trimming the first 3 characters off of the string $uploadfile
+         */
+        
+         $uploadFile = substr($uploadFile, 3);
+
         $result = $connection->query("INSERT INTO `ListingPhoto` (`photoPath`, `MLSNumber`) VALUES ('$uploadFile', '$mlsNum')");
 
         if($result == 1){

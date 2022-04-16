@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,13 +9,17 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/styleguide.css" />
     <link rel="stylesheet" type="text/css" href="stylesheets/globals.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+    <?php include 'PHPScripts/fetchAgency.php' ?>
+    <?php include 'PHPScripts/getOpenListingReport.php' ?>
+    <?php $openListings = getAllListings(getAgencyID()) ?>
 </head>
 
 <body style="margin: 0; background: #f5f5f5" >
     <header>
         <div class="banner"></div>
         <div class="tucasanacom">tucasana.com</div>
-        <div class="openlisting">Open Listing Report</div>
+        <div class="openlisting">Open Listing Report for <?php echo getAgencyName() ?></div>
     </header>
     <div class="row" style="margin-top: 250px;">
         <div class="col">
@@ -31,14 +36,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <?php while($row = $openListings->fetch_assoc()) : ?>
                         <tr>
-                            <td><a href="#">Link</a></td>
-                            <td>2022-03-17<br /></td>
-                            <td>15<br /><br /></td>
-                            <td>$100,000</td>
-                            <td>2</td>
-                            <td>50</td>
+                            <td><a href=<?php echo $row['detailPath'] ?>>Link</a></td>
+                            <td><?php echo date("M d, Y", strtotime($row['postedDatetime'])) ?> </td>
+                            <td><?php echo getDateDiff($row) ?><br /><br /></td>
+                            <td><?php echo "$" . number_format(getPrice($row)) ?></td>
+                            <td><?php echo getNumShowings($row) ?></td>
+                            <td><?php echo getPageViews($row) ?></td>
                         </tr>
+                    <?php endwhile ?>
                     </tbody>
                 </table>
             </div>

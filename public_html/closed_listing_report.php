@@ -10,9 +10,11 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/globals.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <?php include 'PHPScripts/errorMessage.php' ?>
-    <?php include 'PHPScripts/connect.php' ?>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <?php include 'PHPScripts/fetchAgency.php' ?>
+    <?php include 'PHPScripts/getClosedListingReport.php' ?>
+    <?php $closedListings = getAllListings(getAgencyID()) ?>
 </head>
 
 <body style="margin: 0; background: #f5f5f5" >
@@ -20,7 +22,7 @@
         <header>
             <div class="banner"></div>
             <div class="tucasanacom">tucasana.com</div>
-            <div class="closedlisting">Closed Listing Report</div>
+            <div class="closedlisting">Closed Listing Report for <?php echo getAgencyName() ?></div>
         </header>
         <div class="row" style="margin-top: 250px;">
             <div class="col">
@@ -39,18 +41,20 @@
                             </tr>
                         </thead>
                         <tbody id="sold-listing-list">
-                            <tr v-for="soldListing in soldListings">
-                                <td><a href="#">Link</a></td>
-                                <td>{{ soldListing.closingDate }}</td>
-                                <td>2022-03-17<br /><br /></td>
-                                <td>10</td>
-                                <td>$100,000</td>
-                                <td>{{ soldListing.soldPrice }}</td>
-                                <td>{{ soldListing.sellingAgentFee }}</td>
-                                <td>{{ soldListing.buyingAgentFee }}</td>
+                            <?php while($row = $closedListings->fetch_assoc()) : ?>
+                            <tr>
+                                <td><a href=<?php echo $row['detailPath'] ?>>Link</a></td>
+                                <td><?php echo date("M d, Y", strtotime($row['postedDatetime'])) ?></td>
+                                <td><?php echo date("M d, Y", strtotime(getClosedListing($row['MLSNumber'])['closingDate'])) ?><br /><br /></td>
+                                <td><?php echo getDateDiff($row['postedDatetime'], getClosedListing($row['MLSNumber'])['closingDate']) ?></td>
+                                <td><?php echo "$" . number_format(getPrice($row)) ?></td>
+                                <td><?php echo "$" . number_format(getClosedListing($row['MLSNumber'])['soldPrice']) ?></td>
+                                <td><?php echo "$" . number_format(getClosedListing($row['MLSNumber'])['sellingAgentFee']) ?></td>
+                                <td><?php echo "$" . number_format(getClosedListing($row['MLSNumber'])['buyingAgentFee']) ?></td>
                             </tr>
+                            <?php endwhile ?>
                         </tbody>
-                        <script src="js/vueSoldListings.js"></script>
+                        <!--<script src="js/vueSoldListings.js"></script>  SCRIPT REPLACED BY PHP-->
                     </table>
                 </div>
             </div>

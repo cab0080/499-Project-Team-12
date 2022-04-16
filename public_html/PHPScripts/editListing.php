@@ -21,18 +21,6 @@
         $rooms[$i]['length'] = $_POST['length'][$i];
     }
 
- ////**********TESTING AREA***********
-    // $count = count($_POST['type']);
-    // echo "the count is " . $count;
-    // for($i = 0; $i<$count;$i++){
-    //     echo "<br>This is room number " . $i;
-    //     echo "<br>  Its type is " . $rooms[$i]['type'];
-    //     echo "<br>  Its features are " . $rooms[$i]['features'];
-    //     echo "<br>  Its area is " . $rooms[$i]['area'];
-    //     echo "<br>  Its length is " . $rooms[$i]['length'];
-        
-    // }
-
     //Now we have an array of rooms. We will add them to the database after the property is there too
 
     $listingfencing = 0;
@@ -65,7 +53,6 @@
     
 
     $imageDirectory = 'img/';
-    $thumbnailPath = $imageDirectory . basename($_FILES['photoPath']['name'][0]);
 
 
     /*SINCE WE REMOVED THE OPTION TO ENTER THE AGENCY
@@ -73,7 +60,7 @@
     * THE EASIEST WAY I CAN THINK OF IS WITH AN SQL QUERY TO RETURN IT
     */
     
-    $statement = $connection->prepare("UPDATE `Listing` SET `MLSNumber`='$listingMLSNumber', `thumbnailPath`='$thumbnailPath', `street`=?, `city`=?, `state`='$listingstate', `zip`='$listingzip', 
+    $statement = $connection->prepare("UPDATE `Listing` SET `MLSNumber`='$listingMLSNumber', `street`=?, `city`=?, `state`='$listingstate', `zip`='$listingzip', 
         `area`='$listingarea', `detailPath`='$listingDetailPath', `description`=?, `lotSize`='$listinglotSize', `dwellingType`='$listingdwellingType', `subdivision`=?, `elemSchoolDisctrict`=?,
         `midSchoolDistrict`=?, `highSchoolDistrict`=?, `fencing`='$listingfencing', `detachedGarage`='$listingdetachedGarage', `lastEditDatetime`=CURRENT_TIMESTAMP WHERE `MLSNumber`='$oldMLS'");
     
@@ -96,8 +83,11 @@
         $result = $connection->query("INSERT INTO `ListingPrice` (`MLSNumber`, `changedDatetime`, `price`) VALUES ('$mlsNum', CURRENT_TIMESTAMP, '$listingPrice')");
     }
 
+    // Delete the old rooms
+    $connection->query("DELETE FROM `Room` WHERE `MLSNumber`='$mlsNum'");
+
     //Next, add the rooms
-/*     $counter = 0;
+    $counter = 0;
     for($i=0;$i<$roomCount;$i++){
         $type = $rooms[$i]['type'];
         $features = $rooms[$i]['features'];
@@ -107,16 +97,26 @@
         $statement->bind_param("ss", $type, $features);
         if(!$statement->execute()){
             setMessage("Room insertion error:<br>" . $connection->error);
-            header("Location: ../add_listing.php");
+            header("Location: ../edit_listing.php");
             die;
         }
-    } */
+    }
+    if(isset($_POST['removedPhotos'])) {
+        $removedPhotoCount = count($_POST['removedPhotos']);
+        for($i = 0; $i < $removedPhotoCount; $i++){
+            $thisPath = $_POST['removedPhotos'][$i];
+            $connection->query("DELETE FROM `ListingPhoto` WHERE `MLSNumber`='$mlsNum' AND `photoPath`='$thisPath'");
+        }
+    }
 
     //Now, add the images that the user uploaded, if any
-/* 
+
     for($i = 0; $i < count($_FILES['photoPath']['name']); $i++){
+        if ($_FILES['photoPath']['name'][$i] === "") {
+            continue;
+        }
         $uploadFile = $imageDirectory . basename($_FILES['photoPath']['name'][$i]);
-        move_uploaded_file($_FILES['photoPath']['tmp_name'][$i], $uploadFile);
+        move_uploaded_file("../" . $_FILES['photoPath']['tmp_name'][$i], $uploadFile);
         //we've uploaded the file, now we need to upload the image reference to the database
         $result = $connection->query("INSERT INTO `ListingPhoto` (`photoPath`, `MLSNumber`) VALUES ('$uploadFile', '$mlsNum')");
 
@@ -129,7 +129,13 @@
                 $num++;
             }
         }
-    } */
+    }
+
+
+    $result = $connection->query("SELECT photoPath FROM `ListingPhoto` WHERE `MLSNumber`='$mlsNum' LIMIT 1");
+    $row = $result->fetch_assoc();
+    $thumbnailPath = $row['photoPath'];
+    $connection->query("UPDATE `Listing` SET `thumbnailPath`='$thumbnailPath' WHERE `MLSNumber`='$mlsNum'");
 
     CloseCon($connection);
 
