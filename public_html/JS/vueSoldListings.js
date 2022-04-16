@@ -1,3 +1,7 @@
+/**
+ * This script is currently not being used
+ */
+
 var SoldListings = new Vue({
     el: '#sold-listing-list',
     data: {

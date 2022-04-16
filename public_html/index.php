@@ -33,8 +33,14 @@
             <a class="btn btn-primary add-listing" href="add_listing.php" role="button">New Listing <b>+</b></a>
           </li>
           <?php if(getUserRole() == 'manager') : ?>
-          <li>
-            <a class="btn btn-primary" href="open_listing_report.php" role="button">Open listing report</a>
+            <li class="nav-item">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="margin: 10px 20px 0 0;">Reports</button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="open_listing_report.php" target="_blank">Open Listing Report</a>
+                <a class="dropdown-item" href="closed_listing_report.php" target="_blank">Closed Listing Report</a>
+              </div>
+            </div>
           </li>
           <?php endif ?>
           <li class="nav-item">
