@@ -20,7 +20,7 @@ var ListingSummary = new Vue({
         getListing: function(){
             axois.get('PHPScripts/getListingSummary.php')
             .then( function (listing_results) {
-                ListingSummary = listing_results.data; //This might not work... setting the whole app equal to the data returned
+                ListingSummary = listing_results.data;
             })
             .catch(function (error) {
                 console.log(error);

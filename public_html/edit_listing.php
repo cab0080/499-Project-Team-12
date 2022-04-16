@@ -43,18 +43,18 @@
             <div class="col"><label class="form-label">Price</label><input required class="form-control" type="number" name="price" min="0" step="0.01" style="width: 500px;" value='<?php echo str_replace(',', '', getPrice($_GET['number'])) ?>'></div>
         </div>
         <div id="rooms" class="container" style="margin-left: 0px;margin-right: 0px;padding: 0px;">
+            <div class="row">
+                <div class="col"><button class="btn btn-primary" id="add_room" type="button" onclick="createNewRoom();">Add Room</button></div>
+            </div>
             <div id="room-list">
-                <div class="room row" v-for="room in rooms">
+                <div class="row" v-for="room in rooms">
                     <div class="col"><label class="form-label">Room Type</label><input class="form-control" type="text" name="type[]" style="width: 400px;" v-bind:value="room.type"></div>
                     <div class="col"><label class="form-label">Room Features</label><textarea class="form-control" name="features[]" style="width: 400px;">{{room.features}}</textarea></div>
                     <div class="col"><label class="form-label">Area</label><input class="form-control" type="number" name="area1[]" min="0" style="width: 130px;" v-bind:value="room.area"></div>
                     <div class="col"><label class="form-label">Length</label><input class="form-control" type="number" name="length[]" min="0" style="width: 130px;" v-bind:value="room.length"></div>
-                    <div class="col"><button class="btn btn-primary" id="delete_room" type="button" style="margin-top: 32px;" onclick="removeRoom();">Remove</button></div>
+                    <div class="col"><button class="btn btn-primary" id="delete_room" type="button" style="margin-top: 32px;" onclick="removeRoom(event);">Remove</button></div>
                 </div>
                 <script src="JS/getRooms.js"></script>
-            </div>
-            <div class="row">
-                <div class="col"><button class="btn btn-primary" id="add_room" type="button" onclick="createNewRoom();">Add Room</button></div>
             </div>
         </div>
         <div class="row">
@@ -174,9 +174,19 @@
                 </select>
             </div>
         </div>
-        <div class="row">
-            <div class="col"><label class="form-label">Photos (Select all files at once.)</label><input class="form-control" type="file" accept="image/*" name="photoPath[]" multiple required style="width: 500px;"></div>
+        <div class="row" id="photo-container">
+            <div class="col">
+                <ul class="list-group" style="width: 500px;">
+                    <li class="list-group-item remain" v-for='photo in photos'>
+                        <img class="w-25 d-block" v-bind:src="photo.photoPath" alt="Current Image">
+                        <button type="button" class="btn btn-danger mt-3" onclick="toggleRemovePhoto(event);">Remove Photo</button>
+                        <input class="form-control" hidden type="text" name="removedPhotos[]" v-bind:value="photo.photoPath" disabled></input>
+                    </li>
+                    <li class="list-group-item"><label class="form-label">Add Photos</label><input class="form-control" type="file" multiple accept="image/*" name="photoPath[]" style="width: 400px;"></li>
+                </ul>
+            </div>
         </div>
+        <script src="JS/vuePhotos.js"></script>
         <div class="row">
             <div class="col">
                 <p>Remember to verify.</p><p style="color: #c90000"><?php printMessage(); ?></p><button class="btn btn-primary" type="submit">Submit</button><a href="index.php" class="btn btn-primary" type="button" style="margin-left: 170px;">Cancel</a>
