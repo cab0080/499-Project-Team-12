@@ -1,7 +1,8 @@
 <?php
     session_start();
-    include 'connect.php';
+    //include 'connect.php';
     include 'errorMessage.php';
+    include 'getListingSummary.php';
     $connection = OpenCon();
 
     $mlsNum = $_POST['MLSNumber'];
@@ -49,9 +50,28 @@
 
     $statement->bind_param("sss", $buyerName, $buyerPhone, $buyerEmail);
     $statement->execute();
-    //var_dump($startTime, $endTime);
-    //$result = $statement->get_result()
+
+    //SEND AN EMAIL TO THE LISTING AGENT WHEN IT IS SCHEDULED
+    //First, we need the listing agent's email
+    $listingAgentEmail = returnAgentEmail($mlsNum);
+
+    //We must find the name of the showing agent next, so we can tell the listing agent who is showing their property
+    $sql = "SELECT firstName, lastName FROM Agent WHERE username = '$showingAgent'";
+    $result = $connection->query($sql);
+    $name = $result->fetch_assoc();
+    $showingAgentFirstname = $name['firstName'];
+    $showingAgentLastname = $name['lastName'];
+    
+    //Write and send the message.
+    $message = "You have a showing scheduled for property " . $mlsNum;
+    $message .= "\nShowing time: " . $startTime;
+    $message .= "\nShowing agent: " . $showingAgentFirstname . " " . $showingAgentLastname;
+    $message .= "\nThis message was sent automatically from tucasana.com. Please email the showing agent if you have any further questions.";
+
+    mail($listingAgentEmail, 'Tucasana: Showing Scheduled', $message);
+
     setMessage($connection->error);
+
     CloseCon($connection);
     header("Location: ../showing_schedule.php");
     

@@ -65,7 +65,7 @@
     $listinghighSchoolDistrict = $_POST['highSchoolDistrict'];
     
 
-    $imageDirectory = 'img/';
+    $imageDirectory = '../img/';
     $thumbnailPath = $imageDirectory . basename($_FILES['photoPath']['name'][0]);
 
 
