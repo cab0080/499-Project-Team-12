@@ -112,6 +112,9 @@
     //Now, add the images that the user uploaded, if any
 
     for($i = 0; $i < count($_FILES['photoPath']['name']); $i++){
+        if($_FILES['photoPath']['name'][$i] == "") {
+            continue;
+        }
         $uploadFile = $imageDirectory . basename($_FILES['photoPath']['name'][$i]);
         move_uploaded_file($_FILES['photoPath']['tmp_name'][$i], $uploadFile);
         //we've uploaded the file, now we need to upload the image reference to the database
