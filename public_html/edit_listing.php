@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/globals.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="JS/edit-listing.js"></script>
+    <script type="text/javascript" src="js/edit-listing.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <?php include 'PHPScripts/errorMessage.php'; ?>
@@ -54,7 +54,7 @@
                     <div class="col"><label class="form-label">Length</label><input class="form-control" type="number" name="length[]" min="0" style="width: 130px;" v-bind:value="room.length"></div>
                     <div class="col"><button class="btn btn-primary" id="delete_room" type="button" style="margin-top: 32px;" onclick="removeRoom(event);">Remove</button></div>
                 </div>
-                <script src="JS/getRooms.js"></script>
+                <script src="js/getRooms.js"></script>
             </div>
         </div>
         <div class="row">
@@ -186,7 +186,7 @@
                 </ul>
             </div>
         </div>
-        <script src="JS/vuePhotos.js"></script>
+        <script src="js/vuePhotos.js"></script>
         <div class="row">
             <div class="col">
                 <p>Remember to verify.</p><p style="color: #c90000"><?php printMessage(); ?></p><button class="btn btn-primary" type="submit">Submit</button><a href="index.php" class="btn btn-primary" type="button" style="margin-left: 170px;">Cancel</a>
