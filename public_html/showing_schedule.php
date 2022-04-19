@@ -60,7 +60,7 @@
                     <td>
                         <ul class="list-inline m-0">
                             <li class="list-inline-item">
-                                <a v-bind:href="'PHPScripts/feedback_redirect.php?number=' + showing.MLSNumber + '&time=' + showing.startDatetime" target="blank" class="btn btn-success btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><span class="bi bi-pencil-square"></span></a>
+                                <a v-bind:href="'PHPScripts/feedback_redirect.php?number=' + showing.MLSNumber + '&time=' + showing.startDatetime" target="blank" class="btn btn-success btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="Feedback"><span class="bi bi-pencil-square"></span></a>
                             </li>
                             <li class="list-inline-item">
                                 <a class="btn btn-danger btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="Delete" id="deleteButton" onclick="return confirm('Are you sure you want to delete this showing?');" v-bind:href="'PHPScripts/deleteShowing.php?MLS=' + showing.MLSNumber + '&time=' + showing.startDatetime"><span class="bi bi-trash-fill"></span></a>

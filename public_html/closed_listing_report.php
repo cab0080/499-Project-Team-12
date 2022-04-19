@@ -43,7 +43,7 @@
                         <tbody id="sold-listing-list">
                             <?php while($row = $closedListings->fetch_assoc()) : ?>
                             <tr>
-                                <td><a href=<?php echo $row['detailPath'] ?>>Link</a></td>
+                                <td><a href=<?php echo $row['detailPath'] ?>> <?php echo $row['street'] . ", " . $row['city'] . ", " . $row['state'] . " " . $row['zip'] ?></a></td>
                                 <td><?php echo date("M d, Y", strtotime($row['postedDatetime'])) ?></td>
                                 <td><?php echo date("M d, Y", strtotime(getClosedListing($row['MLSNumber'])['closingDate'])) ?><br /><br /></td>
                                 <td><?php echo getDateDiff($row['postedDatetime'], getClosedListing($row['MLSNumber'])['closingDate']) ?></td>
