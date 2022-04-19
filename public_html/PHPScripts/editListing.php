@@ -104,7 +104,7 @@
     if(isset($_POST['removedPhotos'])) {
         $removedPhotoCount = count($_POST['removedPhotos']);
         for($i = 0; $i < $removedPhotoCount; $i++){
-            $thisPath = $_POST['removedPhotos'][$i];
+            $thisPath = substr($_POST['removedPhotos'][$i], 3);
             $connection->query("DELETE FROM `ListingPhoto` WHERE `MLSNumber`='$mlsNum' AND `photoPath`='$thisPath'");
         }
     }
