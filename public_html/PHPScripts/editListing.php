@@ -52,7 +52,7 @@
 
     
 
-    $imageDirectory = 'img/';
+    $imageDirectory = '../img/';
 
 
     /*SINCE WE REMOVED THE OPTION TO ENTER THE AGENCY
