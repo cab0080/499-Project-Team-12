@@ -38,7 +38,7 @@
                     <tbody>
                     <?php while($row = $openListings->fetch_assoc()) : ?>
                         <tr>
-                            <td><a href=<?php echo $row['detailPath'] ?>>Link</a></td>
+                            <td><a href=<?php echo $row['detailPath'] ?>> <?php echo $row['street'] . ", " . $row['city'] . ", " . $row['state'] . " " . $row['zip'] ?></a></td>
                             <td><?php echo date("M d, Y", strtotime($row['postedDatetime'])) ?> </td>
                             <td><?php echo getDateDiff($row) ?><br /><br /></td>
                             <td><?php echo "$" . number_format(getPrice($row)) ?></td>
