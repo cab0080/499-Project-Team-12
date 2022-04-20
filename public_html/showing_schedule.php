@@ -81,7 +81,7 @@
                 </div>
                 <div class="modal-body">
                     <form method="post" action="PHPScripts/createShowing.php">
-                        <div class="mb-3"><input class="form-control" type="number" name="MLSNumber" placeholder="MLS #" /></div>
+                        <div class="mb-3"><input value="<?php echo $_GET['sentBy'] ?>" class="form-control" type="number" name="MLSNumber" placeholder="MLS #" /></div>
                         <div class="mb-3"><label class="form-label">Showing Start Time</label><input class="form-control" type="datetime-local" name="startDatetime"  /></div>
                         <div class="mb-3"><label class="form-label">Showing End Time</label><input class="form-control" type="datetime-local" name="endDatetime" /></div>
                         <div class="mb-3"><input class="form-control" required type="text" name="buyerName" placeholder="Buyer Name"  /></div>
