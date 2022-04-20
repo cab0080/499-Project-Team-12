@@ -31,11 +31,12 @@
     position: absolute;
     top: 32px;
     z-index: 1;
-  }
+}
 
 .carousel-inner > .carousel-item > img {
     width: 640px;
     height: 460px;
+    object-fit: contain;
 }
   
 .list-inline-item {
