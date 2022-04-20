@@ -5,13 +5,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-        <link rel="stylesheet" type="text/css" href="stylesheets/detailed-listing-page.css" />
-        <link rel="stylesheet" type="text/css" href="stylesheets/styleguide.css" />
-        <link rel="stylesheet" type="text/css" href="stylesheets/globals.css" />
         <?php include 'PHPScripts/getListingSummary.php' ?>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="stylesheets/detailed-listing-page.css" />
+        <link rel="stylesheet" type="text/css" href="stylesheets/styleguide.css" />
+        <link rel="stylesheet" type="text/css" href="stylesheets/globals.css" />
     </head>
 
 <body style="margin: 0; background: #f5f5f5" >
