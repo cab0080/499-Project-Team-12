@@ -74,7 +74,7 @@
                     <div class="col"><p>Showing Requested</p></div>
                     <?php endif ?>
                 <?php else : ?>
-                    <div class="col"><a class="btn btn-primary" type="button" href="showing_schedule.php" target="blank">Schedule Showing</a></div>
+                    <div class="col"><a class="btn btn-primary" type="button" href="showing_schedule.php?sentBy=<?php echo $_GET['number'] ?>" target="blank">Schedule Showing</a></div>
                 <?php endif ?>
                 <?php if($_SESSION['username'] == getAgentUsername($_GET['number'])) : ?>
                     <div class="col">
